@@ -231,6 +231,12 @@
           <boolProp name="quotedData">false</boolProp>
         </CSVDataSet>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Rating BasicAnnualPremiumForAllCoverage" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Rating BasicAnnualPremiumForAllCoverage&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Rating BasicAnnualPremiumForAllCoverage">
           <stringProp name="HTTPSampler.domain">policyadmin.testview.policysense.solutions</stringProp>
           <stringProp name="HTTPSampler.port">443</stringProp>
@@ -350,6 +356,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Quotation por cliente" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Quotation por cliente&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Quotation por cliente" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/quotation</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -395,6 +408,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Cotizacion" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Cotizacion&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Cotizacion" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/quotation</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -438,6 +458,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BusinessRules Evaluate PolicyAdmin" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BusinessRules Evaluate PolicyAdmin&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BusinessRules Evaluate PolicyAdmin" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/businessrules/v1/Evaluate</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -481,6 +508,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Rating GrossAllModalPremium" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Rating GrossAllModalPremium&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Rating GrossAllModalPremium" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/ratingservice/v1/Risk/GrossAllModalPremiumForAllCoverages</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -524,6 +558,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Rating GrossModalPremiumSelected" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Rating GrossModalPremiumSelected&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Rating GrossModalPremiumSelected" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/ratingservice/v1/Risk/GrossModalPremiumForSelectedCoverages</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -567,6 +608,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Rating RiskString" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Rating RiskString&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Rating RiskString" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/ratingservice/v1/RiskString</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -612,6 +660,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="PUT Actualizar Cotizacion" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;PUT Actualizar Cotizacion&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT Actualizar Cotizacion" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/quotation</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -655,6 +710,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Cotizaciones Vida" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Cotizaciones Vida&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Cotizaciones Vida" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/quotationlife</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -700,6 +762,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Duracion Seguro" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Duracion Seguro&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Duracion Seguro">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/insuranceduration</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -743,6 +812,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Productos por Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Productos por Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Productos por Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/product</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -788,6 +864,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Requerimiento Underwriting" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Requerimiento Underwriting&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Requerimiento Underwriting" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/underwritingservice/v1/requirement</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -831,6 +914,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Requerimientos por Cliente" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Requerimientos por Cliente&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Requerimientos por Cliente" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/underwritingservice/v1/requirement/getbyclient</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -876,6 +966,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Casos Underwriting por Filtro" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Casos Underwriting por Filtro&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Casos Underwriting por Filtro" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/underwritingservice/v1/underwritingcase/getbyfilter</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -928,6 +1025,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="02 - Claims (Siniestros)" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;02_Claims&quot;)?u:0,)}</stringProp>
@@ -952,6 +1050,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET FNOL BasicInformation" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET FNOL BasicInformation&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET FNOL BasicInformation" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/fnol/v1/BasicInformation</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -996,6 +1100,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BusinessRules Validacion Cobertura" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BusinessRules Validacion Cobertura&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BusinessRules Validacion Cobertura" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/businessrules/v1/Evaluate</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1039,6 +1150,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET BusinessRules Facts Claims" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET BusinessRules Facts Claims&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET BusinessRules Facts Claims" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/businessrules/v1/Facts</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1076,6 +1194,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET BusinessRules Rulesets Claims" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET BusinessRules Rulesets Claims&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET BusinessRules Rulesets Claims" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/businessrules/v1/Rulesets</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1113,6 +1238,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="03 - Billing (Facturacion y Cobranza)" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;03_Billing&quot;)?u:0,)}</stringProp>
@@ -1137,6 +1263,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Bills por Poliza" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Bills por Poliza&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Bills por Poliza" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/billing/v1/Bill/BillsByPolicy</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1187,6 +1319,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BillingOrder PolicyIssue" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BillingOrder PolicyIssue&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BillingOrder PolicyIssue" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/billing/v1/BillingOrder/BillingPolicyIssue</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1230,6 +1369,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BusinessRules GracePeriod" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BusinessRules GracePeriod&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BusinessRules GracePeriod" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/businessrules/v1/Evaluate</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1273,6 +1419,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Bills por Cliente" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Bills por Cliente&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Bills por Cliente" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/billing/v1/Bill/BillsByClient</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1325,6 +1478,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET BusinessRules Facts Billing" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET BusinessRules Facts Billing&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET BusinessRules Facts Billing" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/businessrules/v1/Facts</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1362,6 +1522,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="04 - Sales" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;04_Sales&quot;)?u:0,)}</stringProp>
@@ -1386,6 +1547,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Lead por email" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Lead por email&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Lead por email" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/opportunityservice/v1/Lead</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1430,6 +1597,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Lead" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Lead&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Lead" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/opportunityservice/v1/Lead</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1473,6 +1647,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET BusinessQuoteInformation" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET BusinessQuoteInformation&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET BusinessQuoteInformation" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/brokerservice/v1/businessquoteinformation</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1510,6 +1691,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Lead por ID" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Lead por ID&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Lead por ID" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/opportunityservice/v1/Lead/LEAD-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1547,6 +1735,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Oportunidad por ID" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Oportunidad por ID&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Oportunidad por ID" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/opportunityservice/v1/Opportunity/GetById/OPP-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1584,6 +1779,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Oportunidades por Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Oportunidades por Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Oportunidades por Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/opportunityservice/v1/Opportunity/GetAllByDistributionChannel/CH-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1621,6 +1823,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Cliente por Filtro" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Cliente por Filtro&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Cliente por Filtro" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/opportunityservice/v1/Client/GetByFilter</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1666,6 +1875,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Nueva Oportunidad para Cotizacion" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Nueva Oportunidad para Cotizacion&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Nueva Oportunidad para Cotizacion" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/opportunityservice/v1/Opportunity/GetNewOpportunityForQuotation</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1711,6 +1927,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Prospecto Broker" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Prospecto Broker&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Prospecto Broker" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/brokerservice/v1/lead</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1754,6 +1977,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST SurchargeDiscount" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST SurchargeDiscount&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST SurchargeDiscount" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/brokerservice/v1/salessurchargediscount/PostSurchargeDiscount</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1797,6 +2027,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Campana por Codigo" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Campana por Codigo&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Campana por Codigo" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/campaign/v1/Campaign</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1842,6 +2079,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="05 - Distribution Management" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;05_Distribution&quot;)?u:0,)}</stringProp>
@@ -1866,6 +2104,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET DistributionChannel por ID" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET DistributionChannel por ID&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET DistributionChannel por ID" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/DistributionChannel</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1910,6 +2154,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Comisiones por Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Comisiones por Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Comisiones por Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/comission</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1954,6 +2205,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET CommissionLiquidation por Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET CommissionLiquidation por Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET CommissionLiquidation por Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/commisionaccount/v1/CommissionLiquidation/ByChannel</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -1998,6 +2256,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Transacciones Comisionables" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Transacciones Comisionables&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Transacciones Comisionables" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/integrations/v1/commissionabletransaction</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2035,6 +2300,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="PUT Actualizar Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;PUT Actualizar Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT Actualizar Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/DistributionChannel</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2078,6 +2350,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Cuenta Corriente del Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Cuenta Corriente del Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Cuenta Corriente del Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/ChannelCurrentAccount/GetByChannel/DC-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2115,6 +2394,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Acuerdos Economicos del Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Acuerdos Economicos del Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Acuerdos Economicos del Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/EconomicAgreements/GetByChannel/DC-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2152,6 +2438,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Prestamos del Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Prestamos del Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Prestamos del Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/Loans/GetByChannel/DC-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2197,6 +2490,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Saldo Prestamos Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Saldo Prestamos Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Saldo Prestamos Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/Loans/BalanceForChannel/DC-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2234,6 +2534,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Prestamo" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Prestamo&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Prestamo" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/Loans/DC-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2277,6 +2584,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Miembros de Red" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Miembros de Red&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Miembros de Red" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/NetworkMember/GetByChannel/DC-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2314,6 +2628,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Comision" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Comision&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Comision" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/comission</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2357,6 +2678,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Solicitud Creacion Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Solicitud Creacion Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Solicitud Creacion Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/DistributionChannelCreationRequest</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2400,6 +2728,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Usuarios Autorizados" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Usuarios Autorizados&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Usuarios Autorizados" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/distributionchannelservice/v1/AuthorizedUser</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2445,6 +2780,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Cuentas por Pagar Canal" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Cuentas por Pagar Canal&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Cuentas por Pagar Canal" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/commisionaccount/v1/AccountPayableFromChannel</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2488,6 +2830,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Liquidaciones por Estado" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Liquidaciones por Estado&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Liquidaciones por Estado" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/commisionaccount/v1/CommissionLiquidation/ByStatus</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2533,6 +2882,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Acuerdo Economico" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Acuerdo Economico&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Acuerdo Economico" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/commisionaccount/v1/EconomicAgreement</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2578,6 +2934,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Transaccion Comisionable" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Transaccion Comisionable&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Transaccion Comisionable" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/integrations/v1/commissionabletransaction</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2621,6 +2984,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="06 - User Management" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;06_User_Management&quot;)?u:0,)}</stringProp>
@@ -2645,6 +3009,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Usuario" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Usuario&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Usuario" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/usermanagementservices/v1/user</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2688,6 +3058,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="PUT Activar Usuario" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;PUT Activar Usuario&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT Activar Usuario" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/usermanagementservices/v1/user/activate</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2731,6 +3108,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="PUT Cambiar Email (UserMgmt)" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;PUT Cambiar Email (UserMgmt)&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT Cambiar Email (UserMgmt)" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/usermanagementservices/v1/user/Email</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2774,6 +3158,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Imagen Usuario" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Imagen Usuario&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Imagen Usuario" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/usermanagement/v1/user/image</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2819,6 +3210,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="07 - Products" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;07_Products&quot;)?u:0,)}</stringProp>
@@ -2843,6 +3235,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Listar Productos" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Listar Productos&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Listar Productos" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/product/v1/Product</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2893,6 +3291,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Coberturas por Producto" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Coberturas por Producto&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Coberturas por Producto" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/coverageservice/v1/coverage/All/PROD-001/LIFE/2026-01-01</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2930,6 +3335,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Producto por Codigo" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Producto por Codigo&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Producto por Codigo" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/product/v1/Product/product</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -2982,6 +3394,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Configuracion Producto" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Configuracion Producto&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Configuracion Producto" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/product/v1/Product/ProductSetting</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3027,6 +3446,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Recargos Descuentos Impuestos" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Recargos Descuentos Impuestos&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Recargos Descuentos Impuestos" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/product/v1/ExtraPremiumDiscountTax/All/VIDA-001/LIFE/2026-01-01</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3064,6 +3490,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Modulos del Producto" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Modulos del Producto&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Modulos del Producto" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/product/v1/Module</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3109,6 +3542,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Combinaciones Pago Duracion" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Combinaciones Pago Duracion&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Combinaciones Pago Duracion" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/lifehealthservice/v1/AllowedCombinationOfPaymentAndInsuranceDuration/VIDA-001/LIFE/2026-01-01</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3146,6 +3586,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="08 - Reinsurance" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;08_Reinsurance&quot;)?u:0,)}</stringProp>
@@ -3170,6 +3611,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Listar Notificaciones Reaseguro" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Listar Notificaciones Reaseguro&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Listar Notificaciones Reaseguro" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/reinsurance/v1/policytransactionnotification</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3207,6 +3654,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Notificacion Reaseguro" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Notificacion Reaseguro&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Notificacion Reaseguro" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/reinsurance/v1/policytransactionnotification</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3250,6 +3704,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Listar Companias Seguro" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Listar Companias Seguro&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Listar Companias Seguro" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/insurancecompanyservice/v1/insurancecompany</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3287,6 +3748,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Compania Seguro por Codigo" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Compania Seguro por Codigo&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Compania Seguro por Codigo" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/insurancecompanyservice/v1/insurancecompany/INS-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3324,6 +3792,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BusinessRules Reaseguro (TG08)" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BusinessRules Reaseguro (TG08)&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BusinessRules Reaseguro (TG08)" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/businessrules/v1/Evaluate</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3367,6 +3842,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="09 - Portal Reinsurance" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;09_Portal_Reinsurance&quot;)?u:0,)}</stringProp>
@@ -3391,6 +3867,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Notificacion Reaseguro por ID" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Notificacion Reaseguro por ID&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Notificacion Reaseguro por ID" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/reinsurance/v1/policytransactionnotification/TXN-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3428,6 +3910,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BusinessRules Reaseguro" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BusinessRules Reaseguro&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BusinessRules Reaseguro" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/businessrules/v1/Evaluate</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3471,6 +3960,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="10 - Portal Self Service" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;10_Portal_Self_Service&quot;)?u:0,)}</stringProp>
@@ -3495,6 +3985,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST ValidationMessage" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST ValidationMessage&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST ValidationMessage" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/data/v1/validationmessage</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3538,6 +4034,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET ValidationMessages" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET ValidationMessages&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET ValidationMessages" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/data/v1/validationmessage</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3575,6 +4078,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="11 - User Center" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;11_User_Center&quot;)?u:0,)}</stringProp>
@@ -3599,6 +4103,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="PUT Cambiar Email Usuario" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;PUT Cambiar Email Usuario&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT Cambiar Email Usuario" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/usermanagementservices/v1/user/Email</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3642,6 +4152,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="12 - Field Service (SMC)" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;12_Field_Service&quot;)?u:0,)}</stringProp>
@@ -3666,6 +4177,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET SMC Resumen Mensajes" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET SMC Resumen Mensajes&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET SMC Resumen Mensajes" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/securemessagecenter/v1/SMC</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3710,6 +4227,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST SMC Enviar Email" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST SMC Enviar Email&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST SMC Enviar Email" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/securemessagecenter/v1/Email</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3753,6 +4277,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Conteo Tareas Usuario" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Conteo Tareas Usuario&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Conteo Tareas Usuario" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/taskcountforuserservice/v1/GetTaskCountForUser/SYNC-001</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3790,6 +4321,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="13 - Feedback" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;13_Feedback&quot;)?u:0,)}</stringProp>
@@ -3814,6 +4346,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST SMC Email Feedback" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST SMC Email Feedback&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST SMC Email Feedback" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/securemessagecenter/v1/Email</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3857,6 +4395,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="14 - Settings" enabled="true">
         <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;14_Settings&quot;)?u:0,)}</stringProp>
@@ -3881,6 +4420,12 @@
           <stringProp name="HTTPSampler.implementation"></stringProp>
         </ConfigTestElement>
         <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET GeneralSystemSetting" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET GeneralSystemSetting&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET GeneralSystemSetting" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/systemsetting/v1/generalsystemsetting</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3925,6 +4470,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET ExchangeRate" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET ExchangeRate&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET ExchangeRate" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/exchangerateservice/v1/ExchangeRate</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -3969,6 +4521,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET BankService GetAll" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET BankService GetAll&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET BankService GetAll" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/bankservice/v1/BankService/GetAll</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -4006,6 +4565,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Bancos por Pais" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Bancos por Pais&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Bancos por Pais" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/bankservice/v1/BankService/GetByCountry/US</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -4043,6 +4609,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Tasas de Interes" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Tasas de Interes&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Tasas de Interes" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/interestservice/v1/Interest</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -4088,6 +4661,13 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Conceptos Cuentas por Pagar" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Conceptos Cuentas por Pagar&quot;.equals(r))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Conceptos Cuentas por Pagar" enabled="true">
           <stringProp name="HTTPSampler.path">/rest/accountpayableconceptservice/v1/AccountPayableConcept</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
@@ -4124,6 +4704,7 @@
             <stringProp name="Assertion.custom_message"></stringProp>
           </ResponseAssertion>
           <hashTree/>
+        </hashTree>
         </hashTree>
       </hashTree>
       <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
