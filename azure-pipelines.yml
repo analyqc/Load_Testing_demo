@@ -36,7 +36,7 @@ parameters:
   type: string
   default: '{}'
 - name: requestToRun
-  displayName: Peticion especifica a ejecutar (ALL para todas)
+  displayName: 'Peticion(es) a ejecutar (ALL para todas, o nombres exactos separados por coma: "GET Cotizaciones Vida,POST Crear Cotizacion")'
   type: string
   default: ALL
 stages:

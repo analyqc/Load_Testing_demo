@@ -232,7 +232,7 @@
         </CSVDataSet>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Rating BasicAnnualPremiumForAllCoverage" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Rating BasicAnnualPremiumForAllCoverage&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Rating BasicAnnualPremiumForAllCoverage&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -358,7 +358,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Quotation por cliente" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Quotation por cliente&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Quotation por cliente&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -410,7 +410,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Cotizacion" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Cotizacion&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Crear Cotizacion&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -460,7 +460,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BusinessRules Evaluate PolicyAdmin" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BusinessRules Evaluate PolicyAdmin&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST BusinessRules Evaluate PolicyAdmin&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -510,7 +510,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Rating GrossAllModalPremium" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Rating GrossAllModalPremium&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Rating GrossAllModalPremium&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -560,7 +560,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Rating GrossModalPremiumSelected" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Rating GrossModalPremiumSelected&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Rating GrossModalPremiumSelected&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -610,7 +610,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Rating RiskString" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Rating RiskString&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Rating RiskString&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -662,7 +662,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="PUT Actualizar Cotizacion" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;PUT Actualizar Cotizacion&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;PUT Actualizar Cotizacion&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -712,7 +712,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Cotizaciones Vida" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Cotizaciones Vida&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Cotizaciones Vida&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -764,7 +764,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Duracion Seguro" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Duracion Seguro&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Crear Duracion Seguro&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -814,7 +814,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Productos por Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Productos por Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Productos por Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -866,7 +866,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Requerimiento Underwriting" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Requerimiento Underwriting&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Crear Requerimiento Underwriting&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -916,7 +916,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Requerimientos por Cliente" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Requerimientos por Cliente&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Requerimientos por Cliente&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -968,7 +968,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Casos Underwriting por Filtro" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Casos Underwriting por Filtro&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Casos Underwriting por Filtro&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1051,7 +1051,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET FNOL BasicInformation" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET FNOL BasicInformation&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET FNOL BasicInformation&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1102,7 +1102,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BusinessRules Validacion Cobertura" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BusinessRules Validacion Cobertura&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST BusinessRules Validacion Cobertura&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1152,7 +1152,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET BusinessRules Facts Claims" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET BusinessRules Facts Claims&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET BusinessRules Facts Claims&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1196,7 +1196,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET BusinessRules Rulesets Claims" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET BusinessRules Rulesets Claims&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET BusinessRules Rulesets Claims&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1264,7 +1264,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Bills por Poliza" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Bills por Poliza&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Bills por Poliza&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1321,7 +1321,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BillingOrder PolicyIssue" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BillingOrder PolicyIssue&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST BillingOrder PolicyIssue&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1371,7 +1371,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BusinessRules GracePeriod" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BusinessRules GracePeriod&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST BusinessRules GracePeriod&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1421,7 +1421,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Bills por Cliente" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Bills por Cliente&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Bills por Cliente&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1480,7 +1480,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET BusinessRules Facts Billing" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET BusinessRules Facts Billing&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET BusinessRules Facts Billing&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1548,7 +1548,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Lead por email" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Lead por email&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Lead por email&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1599,7 +1599,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Lead" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Lead&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Crear Lead&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1649,7 +1649,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET BusinessQuoteInformation" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET BusinessQuoteInformation&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET BusinessQuoteInformation&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1693,7 +1693,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Lead por ID" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Lead por ID&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Lead por ID&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1737,7 +1737,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Oportunidad por ID" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Oportunidad por ID&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Oportunidad por ID&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1781,7 +1781,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Oportunidades por Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Oportunidades por Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Oportunidades por Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1825,7 +1825,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Cliente por Filtro" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Cliente por Filtro&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Cliente por Filtro&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1877,7 +1877,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Nueva Oportunidad para Cotizacion" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Nueva Oportunidad para Cotizacion&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Nueva Oportunidad para Cotizacion&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1929,7 +1929,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Prospecto Broker" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Prospecto Broker&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Crear Prospecto Broker&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -1979,7 +1979,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST SurchargeDiscount" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST SurchargeDiscount&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST SurchargeDiscount&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2029,7 +2029,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Campana por Codigo" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Campana por Codigo&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Campana por Codigo&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2105,7 +2105,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET DistributionChannel por ID" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET DistributionChannel por ID&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET DistributionChannel por ID&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2156,7 +2156,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Comisiones por Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Comisiones por Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Comisiones por Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2207,7 +2207,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET CommissionLiquidation por Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET CommissionLiquidation por Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET CommissionLiquidation por Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2258,7 +2258,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Transacciones Comisionables" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Transacciones Comisionables&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Transacciones Comisionables&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2302,7 +2302,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="PUT Actualizar Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;PUT Actualizar Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;PUT Actualizar Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2352,7 +2352,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Cuenta Corriente del Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Cuenta Corriente del Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Cuenta Corriente del Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2396,7 +2396,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Acuerdos Economicos del Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Acuerdos Economicos del Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Acuerdos Economicos del Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2440,7 +2440,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Prestamos del Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Prestamos del Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Prestamos del Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2492,7 +2492,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Saldo Prestamos Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Saldo Prestamos Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Saldo Prestamos Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2536,7 +2536,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Prestamo" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Prestamo&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Crear Prestamo&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2586,7 +2586,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Miembros de Red" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Miembros de Red&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Miembros de Red&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2630,7 +2630,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Comision" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Comision&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Crear Comision&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2680,7 +2680,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Solicitud Creacion Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Solicitud Creacion Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Solicitud Creacion Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2730,7 +2730,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Usuarios Autorizados" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Usuarios Autorizados&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Usuarios Autorizados&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2782,7 +2782,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Cuentas por Pagar Canal" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Cuentas por Pagar Canal&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Cuentas por Pagar Canal&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2832,7 +2832,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Liquidaciones por Estado" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Liquidaciones por Estado&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Liquidaciones por Estado&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2884,7 +2884,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Acuerdo Economico" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Acuerdo Economico&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Acuerdo Economico&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -2936,7 +2936,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Transaccion Comisionable" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Transaccion Comisionable&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Transaccion Comisionable&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3010,7 +3010,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Usuario" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Usuario&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Crear Usuario&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3060,7 +3060,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="PUT Activar Usuario" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;PUT Activar Usuario&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;PUT Activar Usuario&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3110,7 +3110,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="PUT Cambiar Email (UserMgmt)" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;PUT Cambiar Email (UserMgmt)&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;PUT Cambiar Email (UserMgmt)&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3160,7 +3160,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Imagen Usuario" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Imagen Usuario&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Imagen Usuario&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3236,7 +3236,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Listar Productos" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Listar Productos&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Listar Productos&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3293,7 +3293,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Coberturas por Producto" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Coberturas por Producto&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Coberturas por Producto&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3337,7 +3337,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Producto por Codigo" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Producto por Codigo&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Producto por Codigo&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3396,7 +3396,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Configuracion Producto" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Configuracion Producto&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Configuracion Producto&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3448,7 +3448,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Recargos Descuentos Impuestos" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Recargos Descuentos Impuestos&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Recargos Descuentos Impuestos&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3492,7 +3492,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Modulos del Producto" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Modulos del Producto&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Modulos del Producto&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3544,7 +3544,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Combinaciones Pago Duracion" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Combinaciones Pago Duracion&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Combinaciones Pago Duracion&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3612,7 +3612,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Listar Notificaciones Reaseguro" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Listar Notificaciones Reaseguro&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Listar Notificaciones Reaseguro&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3656,7 +3656,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Crear Notificacion Reaseguro" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST Crear Notificacion Reaseguro&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST Crear Notificacion Reaseguro&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3706,7 +3706,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Listar Companias Seguro" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Listar Companias Seguro&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Listar Companias Seguro&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3750,7 +3750,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Compania Seguro por Codigo" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Compania Seguro por Codigo&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Compania Seguro por Codigo&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3794,7 +3794,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BusinessRules Reaseguro (TG08)" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BusinessRules Reaseguro (TG08)&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST BusinessRules Reaseguro (TG08)&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3868,7 +3868,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Notificacion Reaseguro por ID" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Notificacion Reaseguro por ID&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Notificacion Reaseguro por ID&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3912,7 +3912,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BusinessRules Reaseguro" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST BusinessRules Reaseguro&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST BusinessRules Reaseguro&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -3986,7 +3986,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST ValidationMessage" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST ValidationMessage&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST ValidationMessage&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4036,7 +4036,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET ValidationMessages" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET ValidationMessages&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET ValidationMessages&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4104,7 +4104,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="PUT Cambiar Email Usuario" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;PUT Cambiar Email Usuario&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;PUT Cambiar Email Usuario&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4178,7 +4178,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET SMC Resumen Mensajes" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET SMC Resumen Mensajes&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET SMC Resumen Mensajes&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4229,7 +4229,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST SMC Enviar Email" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST SMC Enviar Email&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST SMC Enviar Email&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4279,7 +4279,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Conteo Tareas Usuario" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Conteo Tareas Usuario&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Conteo Tareas Usuario&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4347,7 +4347,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST SMC Email Feedback" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;POST SMC Email Feedback&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;POST SMC Email Feedback&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4421,7 +4421,7 @@
         </ConfigTestElement>
         <hashTree/>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET GeneralSystemSetting" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET GeneralSystemSetting&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET GeneralSystemSetting&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4472,7 +4472,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET ExchangeRate" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET ExchangeRate&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET ExchangeRate&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4523,7 +4523,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET BankService GetAll" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET BankService GetAll&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET BankService GetAll&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4567,7 +4567,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Bancos por Pais" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Bancos por Pais&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Bancos por Pais&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4611,7 +4611,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Tasas de Interes" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Tasas de Interes&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Tasas de Interes&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
@@ -4663,7 +4663,7 @@
         </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Conceptos Cuentas por Pagar" enabled="true">
-          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||&quot;GET Conceptos Cuentas por Pagar&quot;.equals(r))}</stringProp>
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;,&quot;).collect{it.trim()}.contains(&quot;GET Conceptos Cuentas por Pagar&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
