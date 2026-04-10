@@ -35,6 +35,10 @@ parameters:
   displayName: Overrides límite % error por groupToRun (JSON, ej. {"01_Policy_Admin":1,"01_Claims":3})
   type: string
   default: '{}'
+- name: requestToRun
+  displayName: Peticion especifica a ejecutar (ALL para todas)
+  type: string
+  default: ALL
 stages:
 - stage: __default
   jobs:
@@ -73,7 +77,7 @@ stages:
         script: >
           $testPlan = "Policysense.jmx";
 
-          Write-Host "Params: users=${{ parameters.users }} rampUp=${{ parameters.rampUp }} loop=${{ parameters.loop }} groupToRun=${{ parameters.groupToRun }}";
+          Write-Host "Params: users=${{ parameters.users }} rampUp=${{ parameters.rampUp }} loop=${{ parameters.loop }} groupToRun=${{ parameters.groupToRun }} requestToRun=${{ parameters.requestToRun }}";
 
           $jmeterBat = Get-ChildItem -Path $env:AGENT_TOOLSDIRECTORY -Recurse -Filter 'jmeter.bat' -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName;
 
@@ -123,7 +127,8 @@ stages:
             "-Jusermgmt_host=usermanagement.v1130.policysense.solutions",
             "-Jportal_host=portal.v1130.policysense.solutions",
             "-Jsmc_host=smc.v1130.policysense.solutions",
-            "-Jsettings_host=settings.v1130.policysense.solutions"
+            "-Jsettings_host=settings.v1130.policysense.solutions",
+            "-JrequestToRun=${{ parameters.requestToRun }}"
           ) + $extraProps;
 
           Write-Host "CMD: $jmeterBat $($jmeterArgs -join ' ')";
@@ -275,6 +280,8 @@ stages:
           $users      = '${{ parameters.users }}'
           $rampUp     = '${{ parameters.rampUp }}'
           $loop       = '${{ parameters.loop }}'
+
+          $rows = @($rows | Sort-Object { if (([string](Get-Prop $_ @('transaction','label'))) -ieq 'Total') { 1 } else { 0 } })
 
           $tableRows = ''
           foreach ($r in $rows) {
