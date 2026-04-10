@@ -1,0 +1,1745 @@
+{
+  "info": {
+    "_postman_id": "policysense-suite-2026",
+    "name": "Policysense ERP Suite",
+    "description": "Coleccion completa de APIs Policysense para pruebas de carga JMeter y validacion manual. Cubre los modulos: Policy Admin, Claims/Siniestros, Billing/Facturacion, Sales/Ventas, Distribution Management, Reinsurance/Reaseguro, Products/Productos, User Management, SMC, Portal Autoservicio y Settings/Configuracion.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "token", "value": ""},
+    {"key": "base_url_policyadmin", "value": "https://policyadmin.testview.policysense.solutions"},
+    {"key": "base_url_billing", "value": "https://billing.v1130.policysense.solutions"},
+    {"key": "base_url_claims", "value": "https://claims.v1130.policysense.solutions"},
+    {"key": "base_url_distribution", "value": "https://distributionchannels.v1130.policysense.solutions"},
+    {"key": "base_url_sales", "value": "https://sales.v1130.policysense.solutions"},
+    {"key": "base_url_reinsurance", "value": "https://reinsurance.v1130.policysense.solutions"},
+    {"key": "base_url_product", "value": "https://product.v1130.policysense.solutions"},
+    {"key": "base_url_usermgmt", "value": "https://usermanagement.v1130.policysense.solutions"},
+    {"key": "base_url_portal", "value": "https://portal.v1130.policysense.solutions"},
+    {"key": "base_url_smc", "value": "https://smc.v1130.policysense.solutions"},
+    {"key": "base_url_settings", "value": "https://settings.v1130.policysense.solutions"}
+  ],
+  "item": [
+    {
+      "name": "00 - OAuth",
+      "item": [
+        {
+          "name": "POST OAuth - Obtener Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var json = pm.response.json();",
+                  "pm.collectionVariables.set(\"token\", json.access_token);",
+                  "pm.test(\"Token obtenido\", () => pm.response.to.have.status(200));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/x-www-form-urlencoded"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "grant_type=password&username=MxAdmin&password=Admin_123&client_id=policysense"
+            },
+            "url": {
+              "raw": "{{base_url_sales}}/oauth/v2/token",
+              "host": ["{{base_url_sales}}"],
+              "path": ["oauth", "v2", "token"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 - Policy Admin",
+      "item": [
+        {
+          "name": "RatingService",
+          "item": [
+            {
+              "name": "POST BasicAnnualPremiumForAllCoverage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"productCode\":\"VIDA-001\",\"lob\":\"LIFE\",\"effectiveDate\":\"2026-01-01\",\"insuredAge\":35,\"coverageAmount\":100000}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/ratingservice/v1/Risk/BasicAnnualPremiumForAllCoverage",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "ratingservice", "v1", "Risk", "BasicAnnualPremiumForAllCoverage"]
+                }
+              }
+            },
+            {
+              "name": "POST GrossAllModalPremiumForAllCoverages",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"productCode\":\"VIDA-001\",\"lob\":\"LIFE\",\"effectiveDate\":\"2026-01-01\",\"insuredAge\":35,\"paymentFrequency\":\"MONTHLY\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/ratingservice/v1/Risk/GrossAllModalPremiumForAllCoverages",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "ratingservice", "v1", "Risk", "GrossAllModalPremiumForAllCoverages"]
+                }
+              }
+            },
+            {
+              "name": "POST GrossModalPremiumForSelectedCoverages",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"productCode\":\"VIDA-001\",\"lob\":\"LIFE\",\"effectiveDate\":\"2026-01-01\",\"coverageCodes\":[\"COV-001\",\"COV-002\"]}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/ratingservice/v1/Risk/GrossModalPremiumForSelectedCoverages",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "ratingservice", "v1", "Risk", "GrossModalPremiumForSelectedCoverages"]
+                }
+              }
+            },
+            {
+              "name": "POST BasicAnnualPremiumAllCoverageSeveralRisks",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"risks\":[{\"productCode\":\"VIDA-001\",\"lob\":\"LIFE\",\"insuredAge\":35},{\"productCode\":\"VIDA-001\",\"lob\":\"LIFE\",\"insuredAge\":40}]}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/ratingservice/v1/Risk/BasicAnnualPremiumAllCoverageSeveralRisks",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "ratingservice", "v1", "Risk", "BasicAnnualPremiumAllCoverageSeveralRisks"]
+                }
+              }
+            },
+            {
+              "name": "GET PolicyInformation",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/ratingservice/v1/Risk/PolicyInformation?policyId=POL-001",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "ratingservice", "v1", "Risk", "PolicyInformation"],
+                  "query": [{"key": "policyId", "value": "POL-001"}]
+                }
+              }
+            },
+            {
+              "name": "GET RiskString",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/ratingservice/v1/RiskString?riskId=RISK-001",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "ratingservice", "v1", "RiskString"],
+                  "query": [{"key": "riskId", "value": "RISK-001"}]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "PolicyAdminService",
+          "item": [
+            {
+              "name": "GET quotation by client",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/policyadminservice/v1/quotation?clientCode=CLIENT-001",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "policyadminservice", "v1", "quotation"],
+                  "query": [{"key": "clientCode", "value": "CLIENT-001"}]
+                }
+              }
+            },
+            {
+              "name": "POST quotation",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"opportunityId\":\"OPP-001\",\"productCode\":\"VIDA-001\",\"lob\":\"LIFE\",\"effectiveDate\":\"2026-01-01\",\"channelSyncId\":\"CH-001\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/policyadminservice/v1/quotation",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "policyadminservice", "v1", "quotation"]
+                }
+              }
+            },
+            {
+              "name": "PUT quotation",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"quotationId\":\"QUO-001\",\"status\":\"APPROVED\",\"approvedBy\":\"MxAdmin\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/policyadminservice/v1/quotation",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "policyadminservice", "v1", "quotation"]
+                }
+              }
+            },
+            {
+              "name": "GET quotationlife by client",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/policyadminservice/v1/quotationlife?clientCode=CLIENT-001",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "policyadminservice", "v1", "quotationlife"],
+                  "query": [{"key": "clientCode", "value": "CLIENT-001"}]
+                }
+              }
+            },
+            {
+              "name": "POST insuranceduration",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"productCode\":\"VIDA-001\",\"lob\":\"LIFE\",\"startDate\":\"2026-01-01\",\"durationMonths\":12}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/policyadminservice/v1/insuranceduration",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "policyadminservice", "v1", "insuranceduration"]
+                }
+              }
+            },
+            {
+              "name": "GET product by channel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/policyadminservice/v1/product?channelSyncId=CH-001",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "policyadminservice", "v1", "product"],
+                  "query": [{"key": "channelSyncId", "value": "CH-001"}]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "UnderwritingService",
+          "item": [
+            {
+              "name": "GET requirement by client",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/underwritingservice/v1/requirement/getbyclient?clientCode=CLIENT-001",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "underwritingservice", "v1", "requirement", "getbyclient"],
+                  "query": [{"key": "clientCode", "value": "CLIENT-001"}]
+                }
+              }
+            },
+            {
+              "name": "POST requirement",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"quotationId\":\"QUO-001\",\"requirementType\":\"MEDICAL\",\"description\":\"Examen medico requerido\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/underwritingservice/v1/requirement",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "underwritingservice", "v1", "requirement"]
+                }
+              }
+            },
+            {
+              "name": "GET underwritingcase by filter",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/underwritingservice/v1/underwritingcase/getbyfilter?status=PENDING&channelId=CH-001",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "underwritingservice", "v1", "underwritingcase", "getbyfilter"],
+                  "query": [
+                    {"key": "status", "value": "PENDING"},
+                    {"key": "channelId", "value": "CH-001"}
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "BusinessRules (PolicyAdmin)",
+          "item": [
+            {
+              "name": "POST Evaluate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"rulesetName\":\"UnderwritingRules\",\"facts\":{\"quotationId\":\"QUO-001\",\"age\":35,\"amount\":100000}}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/businessrules/v1/Evaluate",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "businessrules", "v1", "Evaluate"]
+                }
+              }
+            },
+            {
+              "name": "GET Facts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/businessrules/v1/Facts",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "businessrules", "v1", "Facts"]
+                }
+              }
+            },
+            {
+              "name": "GET Rulesets",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_policyadmin}}/rest/businessrules/v1/Rulesets",
+                  "host": ["{{base_url_policyadmin}}"],
+                  "path": ["rest", "businessrules", "v1", "Rulesets"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "02 - Claims / Siniestros",
+      "item": [
+        {
+          "name": "FNOL",
+          "item": [
+            {
+              "name": "GET BasicInformation",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_claims}}/rest/fnol/v1/BasicInformation?NoticeID=FNOL-001",
+                  "host": ["{{base_url_claims}}"],
+                  "path": ["rest", "fnol", "v1", "BasicInformation"],
+                  "query": [{"key": "NoticeID", "value": "FNOL-001"}]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "BusinessRules (Claims)",
+          "item": [
+            {
+              "name": "POST Evaluate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"rulesetName\":\"CoverageValidationRules\",\"facts\":{\"policyId\":\"POL-001\",\"claimType\":\"DEATH\",\"occurrenceDate\":\"2026-01-15\"}}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_claims}}/rest/businessrules/v1/Evaluate",
+                  "host": ["{{base_url_claims}}"],
+                  "path": ["rest", "businessrules", "v1", "Evaluate"]
+                }
+              }
+            },
+            {
+              "name": "GET Facts",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_claims}}/rest/businessrules/v1/Facts",
+                  "host": ["{{base_url_claims}}"],
+                  "path": ["rest", "businessrules", "v1", "Facts"]
+                }
+              }
+            },
+            {
+              "name": "GET Rulesets",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_claims}}/rest/businessrules/v1/Rulesets",
+                  "host": ["{{base_url_claims}}"],
+                  "path": ["rest", "businessrules", "v1", "Rulesets"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "03 - Billing / Facturacion",
+      "item": [
+        {
+          "name": "Billing",
+          "item": [
+            {
+              "name": "GET BillsByPolicy",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_billing}}/rest/billing/v1/Bill/BillsByPolicy?PolicyID=POL-001&EffectiveDate=2026-01-01",
+                  "host": ["{{base_url_billing}}"],
+                  "path": ["rest", "billing", "v1", "Bill", "BillsByPolicy"],
+                  "query": [
+                    {"key": "PolicyID", "value": "POL-001"},
+                    {"key": "EffectiveDate", "value": "2026-01-01"}
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET BillsByClient",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_billing}}/rest/billing/v1/Bill/BillsByClient?ClientID=CLIENT-001&EffectiveDate=2026-01-01",
+                  "host": ["{{base_url_billing}}"],
+                  "path": ["rest", "billing", "v1", "Bill", "BillsByClient"],
+                  "query": [
+                    {"key": "ClientID", "value": "CLIENT-001"},
+                    {"key": "EffectiveDate", "value": "2026-01-01"}
+                  ]
+                }
+              }
+            },
+            {
+              "name": "POST BillingPolicyIssue",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"policyId\":\"POL-001\",\"effectiveDate\":\"2026-01-01\",\"premiumAmount\":1200.00,\"paymentFrequency\":\"MONTHLY\",\"gracePeriodDays\":30}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_billing}}/rest/billing/v1/BillingOrder/BillingPolicyIssue",
+                  "host": ["{{base_url_billing}}"],
+                  "path": ["rest", "billing", "v1", "BillingOrder", "BillingPolicyIssue"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "BusinessRules (Billing)",
+          "item": [
+            {
+              "name": "POST Evaluate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"rulesetName\":\"GracePeriodRules\",\"facts\":{\"policyId\":\"POL-001\",\"paymentDueDate\":\"2026-02-01\",\"gracePeriodDays\":30}}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_billing}}/rest/businessrules/v1/Evaluate",
+                  "host": ["{{base_url_billing}}"],
+                  "path": ["rest", "businessrules", "v1", "Evaluate"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "04 - Sales / Ventas",
+      "item": [
+        {
+          "name": "OpportunityService",
+          "item": [
+            {
+              "name": "GET Lead by email",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/opportunityservice/v1/Lead?email=juan.perez@test.com",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "opportunityservice", "v1", "Lead"],
+                  "query": [{"key": "email", "value": "juan.perez@test.com"}]
+                }
+              }
+            },
+            {
+              "name": "POST Lead",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"firstName\":\"Juan\",\"lastName\":\"Perez\",\"email\":\"juan.perez@test.com\",\"phone\":\"555-0001\",\"channelSyncId\":\"CH-001\",\"productCode\":\"VIDA-001\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/opportunityservice/v1/Lead",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "opportunityservice", "v1", "Lead"]
+                }
+              }
+            },
+            {
+              "name": "GET Lead by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/opportunityservice/v1/Lead/LEAD-001",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "opportunityservice", "v1", "Lead", "LEAD-001"]
+                }
+              }
+            },
+            {
+              "name": "GET Opportunity GetById",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/opportunityservice/v1/Opportunity/GetById/OPP-001",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "opportunityservice", "v1", "Opportunity", "GetById", "OPP-001"]
+                }
+              }
+            },
+            {
+              "name": "GET Opportunity GetAllByDistributionChannel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/opportunityservice/v1/Opportunity/GetAllByDistributionChannel/CH-001",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "opportunityservice", "v1", "Opportunity", "GetAllByDistributionChannel", "CH-001"]
+                }
+              }
+            },
+            {
+              "name": "GET Client GetByFilter",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/opportunityservice/v1/Client/GetByFilter?Email=juan.perez@test.com",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "opportunityservice", "v1", "Client", "GetByFilter"],
+                  "query": [{"key": "Email", "value": "juan.perez@test.com"}]
+                }
+              }
+            },
+            {
+              "name": "GET Opportunity GetNewOpportunityForQuotation",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/opportunityservice/v1/Opportunity/GetNewOpportunityForQuotation?channelSyncId=CH-001",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "opportunityservice", "v1", "Opportunity", "GetNewOpportunityForQuotation"],
+                  "query": [{"key": "channelSyncId", "value": "CH-001"}]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "BrokerService",
+          "item": [
+            {
+              "name": "POST lead (broker)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"firstName\":\"Ana\",\"lastName\":\"Lopez\",\"email\":\"ana.lopez@broker.com\",\"brokerCode\":\"BRK-001\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/brokerservice/v1/lead",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "brokerservice", "v1", "lead"]
+                }
+              }
+            },
+            {
+              "name": "GET businessquoteinformation",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/brokerservice/v1/businessquoteinformation?channelSyncId=CH-001",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "brokerservice", "v1", "businessquoteinformation"],
+                  "query": [{"key": "channelSyncId", "value": "CH-001"}]
+                }
+              }
+            },
+            {
+              "name": "POST PostSurchargeDiscount",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"quotationId\":\"QUO-001\",\"type\":\"DISCOUNT\",\"percentage\":5.0,\"reason\":\"Fidelidad\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/brokerservice/v1/salessurchargediscount/PostSurchargeDiscount",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "brokerservice", "v1", "salessurchargediscount", "PostSurchargeDiscount"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Campaign",
+          "item": [
+            {
+              "name": "GET Campaign GetByUserSyncId",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/campaign/v1/Campaign/GetByUserSyncId/SYNC-001/CH-001",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "campaign", "v1", "Campaign", "GetByUserSyncId", "SYNC-001", "CH-001"]
+                }
+              }
+            },
+            {
+              "name": "GET Campaign by code",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_sales}}/rest/campaign/v1/Campaign?campaignCode=CAMP-001",
+                  "host": ["{{base_url_sales}}"],
+                  "path": ["rest", "campaign", "v1", "Campaign"],
+                  "query": [{"key": "campaignCode", "value": "CAMP-001"}]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "05 - Distribution Management",
+      "item": [
+        {
+          "name": "DistributionChannelService",
+          "item": [
+            {
+              "name": "GET DistributionChannel by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/DistributionChannel?id=DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "DistributionChannel"],
+                  "query": [{"key": "id", "value": "DC-001"}]
+                }
+              }
+            },
+            {
+              "name": "PUT DistributionChannel",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"id\":\"DC-001\",\"status\":\"ACTIVE\",\"levelCode\":\"ADVANCED\",\"syncUserId\":\"SYNC-001\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/DistributionChannel",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "DistributionChannel"]
+                }
+              }
+            },
+            {
+              "name": "GET ChannelCurrentAccount GetByChannel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/ChannelCurrentAccount/GetByChannel/DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "ChannelCurrentAccount", "GetByChannel", "DC-001"]
+                }
+              }
+            },
+            {
+              "name": "GET EconomicAgreements GetByChannel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/EconomicAgreements/GetByChannel/DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "EconomicAgreements", "GetByChannel", "DC-001"]
+                }
+              }
+            },
+            {
+              "name": "GET Loans GetByChannel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/Loans/GetByChannel/DC-001?status=ACTIVE",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "Loans", "GetByChannel", "DC-001"],
+                  "query": [{"key": "status", "value": "ACTIVE"}]
+                }
+              }
+            },
+            {
+              "name": "GET Loans BalanceForChannel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/Loans/BalanceForChannel/DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "Loans", "BalanceForChannel", "DC-001"]
+                }
+              }
+            },
+            {
+              "name": "POST Loans",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"amount\":5000.00,\"currencyCode\":\"USD\",\"interestRate\":3.5,\"termMonths\":12}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/Loans/DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "Loans", "DC-001"]
+                }
+              }
+            },
+            {
+              "name": "GET NetworkMember GetByChannel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/NetworkMember/GetByChannel/DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "NetworkMember", "GetByChannel", "DC-001"]
+                }
+              }
+            },
+            {
+              "name": "GET comission by channel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/comission?channelId=DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "comission"],
+                  "query": [{"key": "channelId", "value": "DC-001"}]
+                }
+              }
+            },
+            {
+              "name": "POST comission",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"channelId\":\"DC-001\",\"productCode\":\"VIDA-001\",\"commissionRate\":8.5,\"effectiveDate\":\"2026-01-01\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/comission",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "comission"]
+                }
+              }
+            },
+            {
+              "name": "POST DistributionChannelCreationRequest",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"channelType\":\"AGENT\",\"firstName\":\"Carlos\",\"lastName\":\"Gomez\",\"email\":\"carlos@agent.com\",\"sponsorChannelId\":\"DC-001\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/DistributionChannelCreationRequest",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "DistributionChannelCreationRequest"]
+                }
+              }
+            },
+            {
+              "name": "GET AuthorizedUser by email",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/distributionchannelservice/v1/AuthorizedUser?email=agent@test.com",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "distributionchannelservice", "v1", "AuthorizedUser"],
+                  "query": [{"key": "email", "value": "agent@test.com"}]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "CommisionAccount",
+          "item": [
+            {
+              "name": "GET AccountPayableFromChannel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/commisionaccount/v1/AccountPayableFromChannel?channelId=DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "commisionaccount", "v1", "AccountPayableFromChannel"],
+                  "query": [{"key": "channelId", "value": "DC-001"}]
+                }
+              }
+            },
+            {
+              "name": "POST AccountPayableFromChannel",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"channelId\":\"DC-001\",\"amount\":850.00,\"currencyCode\":\"USD\",\"periodStart\":\"2026-01-01\",\"periodEnd\":\"2026-01-31\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/commisionaccount/v1/AccountPayableFromChannel",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "commisionaccount", "v1", "AccountPayableFromChannel"]
+                }
+              }
+            },
+            {
+              "name": "GET CommissionLiquidation ByChannel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/commisionaccount/v1/CommissionLiquidation/ByChannel?channelId=DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "commisionaccount", "v1", "CommissionLiquidation", "ByChannel"],
+                  "query": [{"key": "channelId", "value": "DC-001"}]
+                }
+              }
+            },
+            {
+              "name": "GET CommissionLiquidation ByStatus",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/commisionaccount/v1/CommissionLiquidation/ByStatus?status=PENDING",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "commisionaccount", "v1", "CommissionLiquidation", "ByStatus"],
+                  "query": [{"key": "status", "value": "PENDING"}]
+                }
+              }
+            },
+            {
+              "name": "GET EconomicAgreement by channel",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/commisionaccount/v1/EconomicAgreement?channelId=DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "commisionaccount", "v1", "EconomicAgreement"],
+                  "query": [{"key": "channelId", "value": "DC-001"}]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "Integrations",
+          "item": [
+            {
+              "name": "GET commissionabletransaction",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/integrations/v1/commissionabletransaction?channelId=DC-001",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "integrations", "v1", "commissionabletransaction"],
+                  "query": [{"key": "channelId", "value": "DC-001"}]
+                }
+              }
+            },
+            {
+              "name": "POST commissionabletransaction",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"channelId\":\"DC-001\",\"transactionType\":\"COMMISSION\",\"amount\":500.00,\"policyId\":\"POL-001\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_distribution}}/rest/integrations/v1/commissionabletransaction",
+                  "host": ["{{base_url_distribution}}"],
+                  "path": ["rest", "integrations", "v1", "commissionabletransaction"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "06 - Reinsurance / Reaseguro",
+      "item": [
+        {
+          "name": "Reinsurance",
+          "item": [
+            {
+              "name": "GET policytransactionnotification",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_reinsurance}}/rest/reinsurance/v1/policytransactionnotification?policyId=POL-001",
+                  "host": ["{{base_url_reinsurance}}"],
+                  "path": ["rest", "reinsurance", "v1", "policytransactionnotification"],
+                  "query": [{"key": "policyId", "value": "POL-001"}]
+                }
+              }
+            },
+            {
+              "name": "POST policytransactionnotification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"policyId\":\"POL-001\",\"transactionType\":\"ISSUE\",\"effectiveDate\":\"2026-01-01\",\"premiumAmount\":1200.00,\"reinsuredPercentage\":30.0}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_reinsurance}}/rest/reinsurance/v1/policytransactionnotification",
+                  "host": ["{{base_url_reinsurance}}"],
+                  "path": ["rest", "reinsurance", "v1", "policytransactionnotification"]
+                }
+              }
+            },
+            {
+              "name": "GET policytransactionnotification by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_reinsurance}}/rest/reinsurance/v1/policytransactionnotification/TXN-001",
+                  "host": ["{{base_url_reinsurance}}"],
+                  "path": ["rest", "reinsurance", "v1", "policytransactionnotification", "TXN-001"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "InsuranceCompanyService",
+          "item": [
+            {
+              "name": "GET insurancecompany all",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_reinsurance}}/rest/insurancecompanyservice/v1/insurancecompany",
+                  "host": ["{{base_url_reinsurance}}"],
+                  "path": ["rest", "insurancecompanyservice", "v1", "insurancecompany"]
+                }
+              }
+            },
+            {
+              "name": "GET insurancecompany by ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_reinsurance}}/rest/insurancecompanyservice/v1/insurancecompany/INS-001",
+                  "host": ["{{base_url_reinsurance}}"],
+                  "path": ["rest", "insurancecompanyservice", "v1", "insurancecompany", "INS-001"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "BusinessRules (Reinsurance)",
+          "item": [
+            {
+              "name": "POST Evaluate",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"rulesetName\":\"ReinsuranceCessionRules\",\"facts\":{\"policyId\":\"POL-001\",\"premiumAmount\":1200.00,\"productCode\":\"VIDA-001\"}}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_reinsurance}}/rest/businessrules/v1/Evaluate",
+                  "host": ["{{base_url_reinsurance}}"],
+                  "path": ["rest", "businessrules", "v1", "Evaluate"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "07 - Products / Productos",
+      "item": [
+        {
+          "name": "ProductService",
+          "item": [
+            {
+              "name": "GET Product list",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_product}}/rest/product/v1/Product?Page=1&PageSize=10&lob=LIFE",
+                  "host": ["{{base_url_product}}"],
+                  "path": ["rest", "product", "v1", "Product"],
+                  "query": [
+                    {"key": "Page", "value": "1"},
+                    {"key": "PageSize", "value": "10"},
+                    {"key": "lob", "value": "LIFE"}
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Product by code",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_product}}/rest/product/v1/Product/product?ProductCode=VIDA-001&LOB=LIFE",
+                  "host": ["{{base_url_product}}"],
+                  "path": ["rest", "product", "v1", "Product", "product"],
+                  "query": [
+                    {"key": "ProductCode", "value": "VIDA-001"},
+                    {"key": "LOB", "value": "LIFE"}
+                  ]
+                }
+              }
+            },
+            {
+              "name": "GET Product ProductSetting",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_product}}/rest/product/v1/Product/ProductSetting?productCode=VIDA-001",
+                  "host": ["{{base_url_product}}"],
+                  "path": ["rest", "product", "v1", "Product", "ProductSetting"],
+                  "query": [{"key": "productCode", "value": "VIDA-001"}]
+                }
+              }
+            },
+            {
+              "name": "GET ExtraPremiumDiscountTax All",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_product}}/rest/product/v1/ExtraPremiumDiscountTax/All/VIDA-001/LIFE/2026-01-01",
+                  "host": ["{{base_url_product}}"],
+                  "path": ["rest", "product", "v1", "ExtraPremiumDiscountTax", "All", "VIDA-001", "LIFE", "2026-01-01"]
+                }
+              }
+            },
+            {
+              "name": "GET Module by product",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_product}}/rest/product/v1/Module?productCode=VIDA-001",
+                  "host": ["{{base_url_product}}"],
+                  "path": ["rest", "product", "v1", "Module"],
+                  "query": [{"key": "productCode", "value": "VIDA-001"}]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "CoverageService",
+          "item": [
+            {
+              "name": "GET coverage All",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_product}}/rest/coverageservice/v1/coverage/All/VIDA-001/LIFE/2026-01-01",
+                  "host": ["{{base_url_product}}"],
+                  "path": ["rest", "coverageservice", "v1", "coverage", "All", "VIDA-001", "LIFE", "2026-01-01"]
+                }
+              }
+            },
+            {
+              "name": "GET coverageselectionhelper GetByProductAndCoverageCode",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_product}}/rest/coverageservice/v1/coverageselectionhelper/GetByProductAndCoverageCode?productCode=VIDA-001&coverageCode=COV-001",
+                  "host": ["{{base_url_product}}"],
+                  "path": ["rest", "coverageservice", "v1", "coverageselectionhelper", "GetByProductAndCoverageCode"],
+                  "query": [
+                    {"key": "productCode", "value": "VIDA-001"},
+                    {"key": "coverageCode", "value": "COV-001"}
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "LifeHealthService",
+          "item": [
+            {
+              "name": "GET AllowedCombinationOfPaymentAndInsuranceDuration",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_product}}/rest/lifehealthservice/v1/AllowedCombinationOfPaymentAndInsuranceDuration/VIDA-001/LIFE/2026-01-01",
+                  "host": ["{{base_url_product}}"],
+                  "path": ["rest", "lifehealthservice", "v1", "AllowedCombinationOfPaymentAndInsuranceDuration", "VIDA-001", "LIFE", "2026-01-01"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "08 - User Management",
+      "item": [
+        {
+          "name": "UserManagementServices",
+          "item": [
+            {
+              "name": "POST user create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"username\":\"testuser01\",\"email\":\"testuser01@policysense.com\",\"syncId\":\"SYNC-TEST-01\",\"roleCode\":\"AGENT\",\"firstName\":\"Test\",\"lastName\":\"User\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_usermgmt}}/rest/usermanagementservices/v1/user",
+                  "host": ["{{base_url_usermgmt}}"],
+                  "path": ["rest", "usermanagementservices", "v1", "user"]
+                }
+              }
+            },
+            {
+              "name": "PUT user activate",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"token\":\"ACTIVATION-TOKEN-001\",\"syncId\":\"SYNC-TEST-01\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_usermgmt}}/rest/usermanagementservices/v1/user/activate",
+                  "host": ["{{base_url_usermgmt}}"],
+                  "path": ["rest", "usermanagementservices", "v1", "user", "activate"]
+                }
+              }
+            },
+            {
+              "name": "PUT user Email update",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"syncId\":\"SYNC-TEST-01\",\"newEmail\":\"testuser01new@policysense.com\",\"confirmationToken\":\"CONF-TOKEN-001\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_usermgmt}}/rest/usermanagementservices/v1/user/Email",
+                  "host": ["{{base_url_usermgmt}}"],
+                  "path": ["rest", "usermanagementservices", "v1", "user", "Email"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "UserManagement",
+          "item": [
+            {
+              "name": "GET user image",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_usermgmt}}/rest/usermanagement/v1/user/image?syncId=SYNC-001",
+                  "host": ["{{base_url_usermgmt}}"],
+                  "path": ["rest", "usermanagement", "v1", "user", "image"],
+                  "query": [{"key": "syncId", "value": "SYNC-001"}]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "09 - SMC / Servicio de Campo",
+      "item": [
+        {
+          "name": "SecureMessageCenter",
+          "item": [
+            {
+              "name": "GET SMC by SyncId",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_smc}}/rest/securemessagecenter/v1/SMC?SyncId=SYNC-001",
+                  "host": ["{{base_url_smc}}"],
+                  "path": ["rest", "securemessagecenter", "v1", "SMC"],
+                  "query": [{"key": "SyncId", "value": "SYNC-001"}]
+                }
+              }
+            },
+            {
+              "name": "POST Email send",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"to\":\"analy@policysense.com\",\"subject\":\"Notificacion de prueba JMeter\",\"body\":\"Prueba de carga - SMC Email\",\"syncId\":\"SYNC-001\",\"priority\":\"NORMAL\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_smc}}/rest/securemessagecenter/v1/Email",
+                  "host": ["{{base_url_smc}}"],
+                  "path": ["rest", "securemessagecenter", "v1", "Email"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "TaskCountForUserService",
+          "item": [
+            {
+              "name": "GET GetTaskCountForUser",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_smc}}/rest/taskcountforuserservice/v1/GetTaskCountForUser/SYNC-001",
+                  "host": ["{{base_url_smc}}"],
+                  "path": ["rest", "taskcountforuserservice", "v1", "GetTaskCountForUser", "SYNC-001"]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "10 - Portal Autoservicio",
+      "item": [
+        {
+          "name": "Data",
+          "item": [
+            {
+              "name": "POST validationmessage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\"policyId\":\"POL-001\",\"messageType\":\"VALIDATION\",\"content\":\"Verificando cobertura activa\",\"channelId\":\"CH-001\"}",
+                  "options": {"raw": {"language": "json"}}
+                },
+                "url": {
+                  "raw": "{{base_url_portal}}/rest/data/v1/validationmessage",
+                  "host": ["{{base_url_portal}}"],
+                  "path": ["rest", "data", "v1", "validationmessage"]
+                }
+              }
+            },
+            {
+              "name": "GET validationmessage by policy",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_portal}}/rest/data/v1/validationmessage?policyId=POL-001",
+                  "host": ["{{base_url_portal}}"],
+                  "path": ["rest", "data", "v1", "validationmessage"],
+                  "query": [{"key": "policyId", "value": "POL-001"}]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "11 - Settings / Configuracion",
+      "item": [
+        {
+          "name": "SystemSetting",
+          "item": [
+            {
+              "name": "GET generalsystemsetting",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_settings}}/rest/systemsetting/v1/generalsystemsetting?SyncId=SYNC-001",
+                  "host": ["{{base_url_settings}}"],
+                  "path": ["rest", "systemsetting", "v1", "generalsystemsetting"],
+                  "query": [{"key": "SyncId", "value": "SYNC-001"}]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ExchangeRateService",
+          "item": [
+            {
+              "name": "GET ExchangeRate by SyncId",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_settings}}/rest/exchangerateservice/v1/ExchangeRate?SyncId=SYNC-001",
+                  "host": ["{{base_url_settings}}"],
+                  "path": ["rest", "exchangerateservice", "v1", "ExchangeRate"],
+                  "query": [{"key": "SyncId", "value": "SYNC-001"}]
+                }
+              }
+            },
+            {
+              "name": "GET ExchangeRate GetByCurrencyCode",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_settings}}/rest/exchangerateservice/v1/ExchangeRate/GetByCurrencyCode/USD",
+                  "host": ["{{base_url_settings}}"],
+                  "path": ["rest", "exchangerateservice", "v1", "ExchangeRate", "GetByCurrencyCode", "USD"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "BankService",
+          "item": [
+            {
+              "name": "GET BankService GetAll",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_settings}}/rest/bankservice/v1/BankService/GetAll",
+                  "host": ["{{base_url_settings}}"],
+                  "path": ["rest", "bankservice", "v1", "BankService", "GetAll"]
+                }
+              }
+            },
+            {
+              "name": "GET BankService GetByCountry",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_settings}}/rest/bankservice/v1/BankService/GetByCountry/US",
+                  "host": ["{{base_url_settings}}"],
+                  "path": ["rest", "bankservice", "v1", "BankService", "GetByCountry", "US"]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "InterestService",
+          "item": [
+            {
+              "name": "GET Interest by SyncId",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {"key": "Authorization", "value": "Bearer {{token}}"},
+                  {"key": "Content-Type", "value": "application/json"}
+                ],
+                "url": {
+                  "raw": "{{base_url_settings}}/rest/interestservice/v1/Interest?SyncId=SYNC-001",
+                  "host": ["{{base_url_settings}}"],
+                  "path": ["rest", "interestservice", "v1", "Interest"],
+                  "query": [{"key": "SyncId", "value": "SYNC-001"}]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

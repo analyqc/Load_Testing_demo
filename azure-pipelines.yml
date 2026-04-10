@@ -1,0 +1,440 @@
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+
+parameters:
+  - name: users
+    displayName: 'Usuarios concurrentes'
+    type: number
+    default: 10
+
+  - name: rampUp
+    displayName: 'Ramp-up (segundos)'
+    type: number
+    default: 5
+
+  - name: loop
+    displayName: 'Iteraciones por usuario'
+    type: number
+    default: 2
+
+  - name: groupToRun
+    displayName: 'ThreadGroup a ejecutar'
+    type: string
+    default: '01_Policy_Admin'
+
+  - name: logRequestResponse
+    displayName: 'Log HTTP request/response completo'
+    type: boolean
+    default: false
+
+  - name: logRequestResponseFailuresOnly
+    displayName: 'Log HTTP solo fallos'
+    type: boolean
+    default: true
+
+  - name: maxErrorPercent
+    displayName: 'Limite % de error (SLA gate)'
+    type: number
+    default: 5
+
+  - name: errorLimitOverridesJson
+    displayName: 'Overrides de limite de error por grupo (JSON)'
+    type: string
+    default: '{}'
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  - group: policysense-jmeter-vars
+
+stages:
+  - stage: LoadTest
+    displayName: 'Pruebas de Carga - Policysense'
+    jobs:
+      - job: JMeterTest
+        displayName: 'Ejecutar JMeter'
+        timeoutInMinutes: 30
+        steps:
+
+          # ----------------------------------------------------------------
+          # 1. Instalar JMeter 5.6.3 via JMeterInstaller@0
+          # ----------------------------------------------------------------
+          - task: JMeterInstaller@0
+            displayName: 'Instalar JMeter 5.6.3'
+            inputs:
+              jmeterVersion: '5.6.3'
+
+          # ----------------------------------------------------------------
+          # 2. Ejecutar JMeter + leer statistics.json + SLA gate
+          # ----------------------------------------------------------------
+          - task: PowerShell@2
+            displayName: 'Ejecutar pruebas de carga y verificar SLA'
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Validacion de seguridad: bloquear ejecucion contra produccion
+                $hostValue = "$(HOST)"
+                $prodPatterns = @('prod', 'production', 'prd', 'live')
+                foreach ($pattern in $prodPatterns) {
+                  if ($hostValue -imatch $pattern) {
+                    Write-Error "##vso[task.logissue type=error]BLOQUEADO: HOST '$hostValue' parece apuntar a produccion. Solo se permiten ambientes QA/Staging."
+                    exit 1
+                  }
+                }
+                Write-Host "HOST validado: $hostValue (no es produccion)"
+
+                # Crear carpetas de salida
+                New-Item -ItemType Directory -Force -Path report | Out-Null
+                New-Item -ItemType Directory -Force -Path results | Out-Null
+
+                # Determinar flags de log HTTP
+                $logFlags = ""
+                $logRequestResponse = [System.Convert]::ToBoolean("${{ parameters.logRequestResponse }}")
+                $logFailuresOnly    = [System.Convert]::ToBoolean("${{ parameters.logRequestResponseFailuresOnly }}")
+                if ($logRequestResponse) {
+                  $logFile = "$(Build.ArtifactStagingDirectory)\http-request-response.log.txt"
+                  if ($logFailuresOnly) {
+                    $logFlags = "-Jjmeter.save.saveservice.output_format=xml -Jjmeter.save.saveservice.response_data.on_error=true -Jjmeter.save.saveservice.samplerData.on_error=true -Jlog_file=$logFile"
+                  } else {
+                    $logFlags = "-Jjmeter.save.saveservice.output_format=xml -Jjmeter.save.saveservice.response_data=true -Jjmeter.save.saveservice.samplerData=true -Jlog_file=$logFile"
+                  }
+                }
+
+                # Construir comando JMeter
+                $jmeterArgs = @(
+                  "-n",
+                  "-t", "Policysense.jmx",
+                  "-l", "results\results.jtl",
+                  "-e", "-o", "report",
+                  "-JgroupToRun=${{ parameters.groupToRun }}",
+                  "-Jusers=${{ parameters.users }}",
+                  "-JrampUp=${{ parameters.rampUp }}",
+                  "-Jloop=${{ parameters.loop }}",
+                  "-Jhost=$(HOST)",
+                  "-Jport=$(PORT)",
+                  "-Jprotocol=https",
+                  "-Jtoken=$(TOKEN)"
+                )
+                if ($logFlags) { $jmeterArgs += $logFlags.Split(" ") }
+
+                Write-Host "Ejecutando: jmeter $($jmeterArgs -join ' ')"
+                & jmeter @jmeterArgs
+                if ($LASTEXITCODE -ne 0) {
+                  Write-Error "##vso[task.logissue type=error]JMeter finalizo con codigo de error $LASTEXITCODE"
+                  exit $LASTEXITCODE
+                }
+
+                # -------------------------------------------------------
+                # Leer statistics.json y mostrar tabla de metricas en log
+                # -------------------------------------------------------
+                function Get-JMeterStatRowList {
+                  param([object]$Root)
+                  $acc = [System.Collections.ArrayList]@()
+                  if ($null -eq $Root) { return @() }
+                  if ($Root -is [System.Collections.IList] -and $Root -isnot [string] -and $Root -isnot [char]) {
+                    foreach ($x in $Root) { if ($null -ne $x) { [void]$acc.Add($x) } }
+                    return @($acc)
+                  }
+                  if ($Root -is [PSCustomObject]) {
+                    $names = @($Root.PSObject.Properties.Name)
+                    $metricLike = ($names -contains 'sampleCount') -or ($names -contains 'errorCount') -or ($names -contains 'meanResTime')
+                    if ($metricLike -and ($names -contains 'transaction')) {
+                      [void]$acc.Add($Root)
+                      return @($acc)
+                    }
+                    foreach ($p in $Root.PSObject.Properties) {
+                      $v = $p.Value
+                      if ($null -eq $v -or $v -isnot [PSCustomObject]) { continue }
+                      $vn = @($v.PSObject.Properties.Name)
+                      if (-not (($vn -contains 'sampleCount') -or ($vn -contains 'errorCount'))) { continue }
+                      if (-not ($vn -contains 'transaction') -or [string]::IsNullOrWhiteSpace([string]$v.transaction)) {
+                        $v | Add-Member -NotePropertyName transaction -NotePropertyValue $p.Name -Force
+                      }
+                      [void]$acc.Add($v)
+                    }
+                  }
+                  return @($acc)
+                }
+
+                function Get-JMeterProp {
+                  param([object]$Row, [string[]]$Names)
+                  if ($null -eq $Row -or $Row -isnot [PSCustomObject]) { return $null }
+                  foreach ($n in $Names) {
+                    foreach ($p in $Row.PSObject.Properties) {
+                      if ($p.Name -ieq $n) { return $p.Value }
+                    }
+                  }
+                  return $null
+                }
+
+                $statsFile = "report\statistics.json"
+                if (-not (Test-Path $statsFile)) {
+                  Write-Warning "No se encontro $statsFile — saltando tabla de metricas."
+                } else {
+                  $rawJson = Get-Content $statsFile -Raw | ConvertFrom-Json
+                  $rows    = Get-JMeterStatRowList -Root $rawJson
+
+                  $header = "{0,-40} {1,8} {2,6} {3,7} {4,8} {5,6} {6,7} {7,8} {8,7} {9,7} {10,7} {11,8} {12,10} {13,10}" `
+                    -f "Label","#Samples","FAIL","Error%","Average","Min","Max","Median","90th","95th","99th","TPS","RecvKB/s","SentKB/s"
+                  $divider = "-" * 130
+                  Write-Host ""
+                  Write-Host "=== Tabla de Metricas JMeter ==="
+                  Write-Host $header
+                  Write-Host $divider
+
+                  $overridesRaw = '${{ parameters.errorLimitOverridesJson }}'
+                  try { $overrides = $overridesRaw | ConvertFrom-Json } catch { $overrides = [PSCustomObject]@{} }
+                  $globalMax  = [double]'${{ parameters.maxErrorPercent }}'
+                  $slaBreached = $false
+                  $slaMessages = [System.Collections.ArrayList]@()
+
+                  foreach ($row in $rows) {
+                    $label       = [string](Get-JMeterProp $row @('transaction','label'))
+                    $samples     = [int](Get-JMeterProp $row @('sampleCount','samples') )
+                    $failures    = [int](Get-JMeterProp $row @('errorCount','failures')  )
+                    $errPct      = if ($samples -gt 0) { [math]::Round(($failures / $samples) * 100, 2) } else { 0.0 }
+                    $avg         = [math]::Round([double](Get-JMeterProp $row @('meanResTime','average')),1)
+                    $minVal      = [int](Get-JMeterProp $row @('minResTime','min'))
+                    $maxVal      = [int](Get-JMeterProp $row @('maxResTime','max'))
+                    $median      = [math]::Round([double](Get-JMeterProp $row @('medianResTime','median')),1)
+                    $pct90       = [int](Get-JMeterProp $row @('pct1ResTime','90thPercentile','percentile90'))
+                    $pct95       = [int](Get-JMeterProp $row @('pct2ResTime','95thPercentile','percentile95'))
+                    $pct99       = [int](Get-JMeterProp $row @('pct3ResTime','99thPercentile','percentile99'))
+                    $tps         = [math]::Round([double](Get-JMeterProp $row @('throughput','tps')),2)
+                    $recvKB      = [math]::Round([double](Get-JMeterProp $row @('receivedKBytesPerSec','recvKB')),2)
+                    $sentKB      = [math]::Round([double](Get-JMeterProp $row @('sentKBytesPerSec','sentKB')),2)
+
+                    Write-Host ("{0,-40} {1,8} {2,6} {3,6:F2}% {4,8} {5,6} {6,7} {7,8} {8,7} {9,7} {10,7} {11,8} {12,10} {13,10}" `
+                      -f $label,$samples,$failures,$errPct,$avg,$minVal,$maxVal,$median,$pct90,$pct95,$pct99,$tps,$recvKB,$sentKB)
+
+                    # Evaluar SLA: override por label o umbral global
+                    $effectiveMax = $globalMax
+                    $overrideProp = $overrides.PSObject.Properties | Where-Object { $_.Name -ieq $label }
+                    if ($overrideProp) { $effectiveMax = [double]$overrideProp.Value }
+
+                    if ($errPct -gt $effectiveMax) {
+                      $slaBreached = $true
+                      [void]$slaMessages.Add("  - '$label': $errPct% de error (limite: $effectiveMax%)")
+                    }
+                  }
+                  Write-Host $divider
+                  Write-Host ""
+
+                  if ($slaBreached) {
+                    foreach ($msg in $slaMessages) { Write-Host $msg }
+                    Write-Error "##vso[task.logissue type=error]SLA gate fallido: los siguientes grupos superaron el limite de error:"
+                    foreach ($msg in $slaMessages) {
+                      Write-Host "##vso[task.logissue type=error]$msg"
+                    }
+                    exit 1
+                  } else {
+                    Write-Host "SLA gate superado: todos los grupos dentro del limite de error ($globalMax%)"
+                  }
+                }
+
+                # Guardar flag de log HTTP para step posterior
+                Write-Host "##vso[task.setvariable variable=logRequestResponseEnabled]${{ parameters.logRequestResponse }}"
+
+          # ----------------------------------------------------------------
+          # 3. Generar reporte HTML inline desde statistics.json
+          # ----------------------------------------------------------------
+          - task: PowerShell@2
+            displayName: 'Generar reporte HTML inline'
+            condition: succeededOrFailed()
+            inputs:
+              targetType: 'inline'
+              script: |
+                $statsFile = "report\statistics.json"
+                $outHtml   = "$(Build.ArtifactStagingDirectory)\jmeter-inline-report.html"
+
+                if (-not (Test-Path $statsFile)) {
+                  Write-Warning "No se encontro $statsFile — no se generara reporte HTML inline."
+                  exit 0
+                }
+
+                function Get-JMeterStatRowList {
+                  param([object]$Root)
+                  $acc = [System.Collections.ArrayList]@()
+                  if ($null -eq $Root) { return @() }
+                  if ($Root -is [System.Collections.IList] -and $Root -isnot [string] -and $Root -isnot [char]) {
+                    foreach ($x in $Root) { if ($null -ne $x) { [void]$acc.Add($x) } }
+                    return @($acc)
+                  }
+                  if ($Root -is [PSCustomObject]) {
+                    $names = @($Root.PSObject.Properties.Name)
+                    $metricLike = ($names -contains 'sampleCount') -or ($names -contains 'errorCount') -or ($names -contains 'meanResTime')
+                    if ($metricLike -and ($names -contains 'transaction')) {
+                      [void]$acc.Add($Root)
+                      return @($acc)
+                    }
+                    foreach ($p in $Root.PSObject.Properties) {
+                      $v = $p.Value
+                      if ($null -eq $v -or $v -isnot [PSCustomObject]) { continue }
+                      $vn = @($v.PSObject.Properties.Name)
+                      if (-not (($vn -contains 'sampleCount') -or ($vn -contains 'errorCount'))) { continue }
+                      if (-not ($vn -contains 'transaction') -or [string]::IsNullOrWhiteSpace([string]$v.transaction)) {
+                        $v | Add-Member -NotePropertyName transaction -NotePropertyValue $p.Name -Force
+                      }
+                      [void]$acc.Add($v)
+                    }
+                  }
+                  return @($acc)
+                }
+
+                function Get-JMeterProp {
+                  param([object]$Row, [string[]]$Names)
+                  if ($null -eq $Row -or $Row -isnot [PSCustomObject]) { return $null }
+                  foreach ($n in $Names) {
+                    foreach ($p in $Row.PSObject.Properties) {
+                      if ($p.Name -ieq $n) { return $p.Value }
+                    }
+                  }
+                  return $null
+                }
+
+                $rawJson  = Get-Content $statsFile -Raw | ConvertFrom-Json
+                $rows     = Get-JMeterStatRowList -Root $rawJson
+                $maxErrPct = [double]'${{ parameters.maxErrorPercent }}'
+                $buildId   = "$(Build.BuildId)"
+                $runDate   = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
+                $group     = "${{ parameters.groupToRun }}"
+
+                $tableRows = ""
+                foreach ($row in $rows) {
+                  $label   = [string](Get-JMeterProp $row @('transaction','label'))
+                  $samples = [int](Get-JMeterProp $row @('sampleCount','samples'))
+                  $fail    = [int](Get-JMeterProp $row @('errorCount','failures'))
+                  $errPct  = if ($samples -gt 0) { [math]::Round(($fail / $samples) * 100, 2) } else { 0.0 }
+                  $avg     = [math]::Round([double](Get-JMeterProp $row @('meanResTime','average')),1)
+                  $minVal  = [int](Get-JMeterProp $row @('minResTime','min'))
+                  $maxVal  = [int](Get-JMeterProp $row @('maxResTime','max'))
+                  $median  = [math]::Round([double](Get-JMeterProp $row @('medianResTime','median')),1)
+                  $pct90   = [int](Get-JMeterProp $row @('pct1ResTime','90thPercentile','percentile90'))
+                  $pct95   = [int](Get-JMeterProp $row @('pct2ResTime','95thPercentile','percentile95'))
+                  $pct99   = [int](Get-JMeterProp $row @('pct3ResTime','99thPercentile','percentile99'))
+                  $tps     = [math]::Round([double](Get-JMeterProp $row @('throughput','tps')),2)
+                  $recvKB  = [math]::Round([double](Get-JMeterProp $row @('receivedKBytesPerSec','recvKB')),2)
+                  $sentKB  = [math]::Round([double](Get-JMeterProp $row @('sentKBytesPerSec','sentKB')),2)
+
+                  $errClass = if ($errPct -gt $maxErrPct) { ' class="err"' } elseif ($errPct -gt 0) { ' class="warn"' } else { '' }
+                  $tableRows += "<tr><td>$label</td><td>$samples</td><td>$fail</td><td$errClass>$errPct%</td>"
+                  $tableRows += "<td>$avg</td><td>$minVal</td><td>$maxVal</td><td>$median</td>"
+                  $tableRows += "<td>$pct90</td><td>$pct95</td><td>$pct99</td><td>$tps</td><td>$recvKB</td><td>$sentKB</td></tr>`n"
+                }
+
+                $html = @"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>JMeter - Policysense Load Test Report</title>
+  <style>
+    body { font-family: Segoe UI, Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 20px; color: #333; }
+    h1   { color: #0078d4; }
+    .meta { background: #fff; border-radius: 6px; padding: 12px 20px; margin-bottom: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,.1); font-size: 0.95em; }
+    .meta span { margin-right: 24px; }
+    table { border-collapse: collapse; width: 100%; background: #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,.1); border-radius: 6px; overflow: hidden; }
+    th    { background: #0078d4; color: #fff; padding: 10px 8px; text-align: right; font-size: 0.85em; white-space: nowrap; }
+    th:first-child { text-align: left; }
+    td    { padding: 8px; text-align: right; border-bottom: 1px solid #eee; font-size: 0.85em; }
+    td:first-child { text-align: left; font-weight: 500; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f0f7ff; }
+    .err  { background: #fde8e8 !important; color: #c0392b; font-weight: bold; }
+    .warn { background: #fef9e7 !important; color: #d35400; }
+    .footer { margin-top: 16px; font-size: 0.8em; color: #888; text-align: right; }
+  </style>
+</head>
+<body>
+  <h1>Policysense - Reporte de Pruebas de Carga</h1>
+  <div class="meta">
+    <span><strong>Build:</strong> $buildId</span>
+    <span><strong>Fecha:</strong> $runDate</span>
+    <span><strong>Grupo:</strong> $group</span>
+    <span><strong>Usuarios:</strong> ${{ parameters.users }}</span>
+    <span><strong>Ramp-up:</strong> ${{ parameters.rampUp }}s</span>
+    <span><strong>Iteraciones:</strong> ${{ parameters.loop }}</span>
+    <span><strong>SLA error max:</strong> $maxErrPct%</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Label</th><th>#Samples</th><th>FAIL</th><th>Error%</th>
+        <th>Avg (ms)</th><th>Min</th><th>Max</th><th>Median</th>
+        <th>90th</th><th>95th</th><th>99th</th>
+        <th>TPS</th><th>RecvKB/s</th><th>SentKB/s</th>
+      </tr>
+    </thead>
+    <tbody>
+$tableRows
+    </tbody>
+  </table>
+  <div class="footer">Generado por azure-pipelines.yml &mdash; Policysense CI/CD &mdash; In Motion S.A.</div>
+</body>
+</html>
+"@
+                New-Item -ItemType Directory -Force -Path (Split-Path $outHtml) | Out-Null
+                $html | Out-File -FilePath $outHtml -Encoding UTF8
+                Write-Host "Reporte HTML inline generado: $outHtml"
+
+          # ----------------------------------------------------------------
+          # 4. Publicar reporte HTML inline (pestana en Azure DevOps)
+          # ----------------------------------------------------------------
+          - task: PublishHtmlReport@1
+            displayName: 'Publicar pestaña JMeter (metricas)'
+            condition: succeededOrFailed()
+            inputs:
+              reportDir: '$(Build.ArtifactStagingDirectory)'
+              tabName: 'JMeter (metricas)'
+              reportFilename: 'jmeter-inline-report.html'
+
+          # ----------------------------------------------------------------
+          # 5. Publicar carpeta report/ completa de JMeter
+          # ----------------------------------------------------------------
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publicar artefacto JMeterReport'
+            condition: succeededOrFailed()
+            inputs:
+              pathToPublish: 'report'
+              artifactName: 'JMeterReport'
+              publishLocation: 'Container'
+
+          # ----------------------------------------------------------------
+          # 6. Publicar results.jtl
+          # ----------------------------------------------------------------
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publicar artefacto JMeterResults (JTL)'
+            condition: succeededOrFailed()
+            inputs:
+              pathToPublish: 'results/results.jtl'
+              artifactName: 'JMeterResults'
+              publishLocation: 'Container'
+
+          # ----------------------------------------------------------------
+          # 7. Publicar log HTTP request/response (condicional)
+          # ----------------------------------------------------------------
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publicar artefacto JMeterHttpLog'
+            condition: and(succeededOrFailed(), eq('${{ parameters.logRequestResponse }}', 'true'))
+            inputs:
+              pathToPublish: '$(Build.ArtifactStagingDirectory)/http-request-response.log.txt'
+              artifactName: 'JMeterHttpLog'
+              publishLocation: 'Container'
+
+          # ----------------------------------------------------------------
+          # 8. Publicar resultados como JUnit (para la pestana Tests en ADO)
+          # ----------------------------------------------------------------
+          - task: PublishTestResults@2
+            displayName: 'Publicar resultados JUnit'
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: 'results/results.xml'
+              failTaskOnFailedTests: false
+              testRunTitle: 'JMeter - Policysense Load Test'

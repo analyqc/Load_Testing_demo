@@ -1,0 +1,22 @@
+# Resultados de ejecución JMeter (generados localmente)
+results/
+reports/
+*.jtl
+*.log
+
+# Archivos temporales JMeter
+jmeter.log
+*.bak
+
+# Datos sensibles
+*.env
+.env*
+credentials*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docs convertidos (regenerables desde los MHTML originales)
+docs/*.txt
