@@ -46,8 +46,8 @@
       {
         "hooks": [
           {
-            "type": "agent",
-            "prompt": "Verifica que los cambios realizados en archivos .jmx sean XML valido y que cada ThreadGroup tenga al menos un ResponseAssertion y un DurationAssertion. Si falta alguno, responde con {\"ok\": false, \"reason\": \"descripcion de lo que falta\"}. Si todo esta bien, responde con {\"ok\": true}. $ARGUMENTS"
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/validate-assertions.sh"
           }
         ]
       }
