@@ -45,6 +45,16 @@ parameters:
     type: string
     default: '{}'
 
+  - name: authBasicToken
+    displayName: 'Basic auth token (base64 de user:password)'
+    type: string
+    default: 'TXhBZG1pbjpBZG1pbl8xMjM='
+
+  - name: ratingMaxDuration
+    displayName: 'SLA max duracion Rating API (ms)'
+    type: number
+    default: 5000
+
 pool:
   vmImage: 'windows-latest'
 
@@ -117,7 +127,10 @@ stages:
                   "-Jhost=$(HOST)",
                   "-Jport=$(PORT)",
                   "-Jprotocol=https",
-                  "-Jtoken=$(TOKEN)"
+                  "-Jtoken=$(TOKEN)",
+                  "-Jauth_user=${{ parameters.authUser }}",
+                  "-Jauth_password=${{ parameters.authPassword }}",
+                  "-Jrating_max_duration=${{ parameters.ratingMaxDuration }}"
                 )
                 if ($logFlags) { $jmeterArgs += $logFlags.Split(" ") }
 

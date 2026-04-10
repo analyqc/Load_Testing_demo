@@ -106,7 +106,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">grant_type=password&amp;username=MxAdmin&amp;password=Admin_123&amp;client_id=policysense</stringProp>
+                <stringProp name="Argument.value">grant_type=password&amp;username=${__P(auth_user,MxAdmin)}&amp;password=${__P(auth_password,Admin_123)}&amp;client_id=policysense</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
@@ -118,6 +118,10 @@
               <elementProp name="Content-Type" elementType="Header">
                 <stringProp name="Header.name">Content-Type</stringProp>
                 <stringProp name="Header.value">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Basic ${__P(auth_basic_token,TXhBZG1pbjpBZG1pbl8xMjM=)}</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
@@ -159,7 +163,7 @@
           <hashTree/>
         </hashTree>
       </hashTree>
-      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Headers Globales">
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Headers Globales" enabled="true">
         <collectionProp name="HeaderManager.headers">
           <elementProp name="Authorization" elementType="Header">
             <stringProp name="Header.name">Authorization</stringProp>
@@ -177,17 +181,17 @@
       </HeaderManager>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="01 - Policy Admin">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;01_Policy_Admin&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,1)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController">
-          <stringProp name="LoopController.loops">${__P(loop,3)}</stringProp>
+          <stringProp name="LoopController.loops">${__P(loop,1)}</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="Defaults PolicyAdmin">
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="Defaults PolicyAdmin" enabled="true">
           <intProp name="HTTPSampler.connect_timeout">5000</intProp>
           <intProp name="HTTPSampler.response_timeout">10000</intProp>
           <stringProp name="HTTPSampler.domain">${policyadmin_host}</stringProp>
@@ -201,15 +205,20 @@
         <hashTree/>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Rating Data" enabled="true">
           <stringProp name="filename">data/rating_data.csv</stringProp>
-          <stringProp name="variableNames">productCode,lob,insuredAge,coverageAmount,effectiveDate</stringProp>
+          <stringProp name="variableNames">lob_code,product_code,sum_insured,specie,sex,birth_date,size,has_pedigree,dangerousness,pet_value,gender_code</stringProp>
           <boolProp name="ignoreFirstLine">true</boolProp>
           <stringProp name="delimiter">,</stringProp>
           <boolProp name="recycle">true</boolProp>
           <boolProp name="stopThread">false</boolProp>
           <stringProp name="shareMode">shareMode.all</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <boolProp name="quotedData">false</boolProp>
         </CSVDataSet>
         <hashTree/>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Rating BasicAnnualPremiumForAllCoverage">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Rating BasicAnnualPremiumForAllCoverage" enabled="true">
+          <stringProp name="HTTPSampler.domain">policyadmin.testview.policysense.solutions</stringProp>
+          <stringProp name="HTTPSampler.port">443</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
           <stringProp name="HTTPSampler.path">/rest/ratingservice/v1/Risk/BasicAnnualPremiumForAllCoverage</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -219,16 +228,29 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{&quot;productCode&quot;:&quot;${productCode}&quot;,&quot;lob&quot;:&quot;${lob}&quot;,&quot;effectiveDate&quot;:&quot;${effectiveDate}&quot;,&quot;insuredAge&quot;:${insuredAge},&quot;coverageAmount&quot;:${coverageAmount}}</stringProp>
+                <stringProp name="Argument.value">{&quot;LineOfBusinessCode&quot;:${lob_code},&quot;ProductCode&quot;:${product_code},&quot;CalculationDate&quot;:&quot;2025-10-01T00:00:00.000Z&quot;,&quot;EffectiveDate&quot;:&quot;2025-10-01T00:00:00.000Z&quot;,&quot;ExpirationDate&quot;:&quot;2026-10-01T00:00:00.000Z&quot;,&quot;OriginalEffectiveDate&quot;:&quot;2025-10-01T00:00:00.000Z&quot;,&quot;SumInsured&quot;:0,&quot;SumInsuredAccumulationOfRisk&quot;:${sum_insured},&quot;SumInsuredTaxes&quot;:${sum_insured},&quot;AnnualPremium&quot;:323.04,&quot;ParticularData&quot;:&quot;{\&quot;Specie\&quot;:\&quot;Dog\&quot;,\&quot;Sex\&quot;:\&quot;Male\&quot;,\&quot;DateOfBirth\&quot;:\&quot;2012-12-16T00:00:00.000Z\&quot;,\&quot;Size\&quot;:\&quot;Medium\&quot;,\&quot;HasPedigree\&quot;:true,\&quot;Neutering\&quot;:true,\&quot;Dangerousness\&quot;:\&quot;Medium\&quot;,\&quot;PetValue\&quot;:30000,\&quot;PureBreed\&quot;:true}&quot;,&quot;InsuranceDuration&quot;:1,&quot;InsuranceDurationUnit&quot;:&quot;Years&quot;,&quot;OpportunityId&quot;:2179,&quot;ExecutionTime&quot;:1466,&quot;FirstAdditionalInformation&quot;:&quot;&quot;,&quot;SecondAdditionalInformation&quot;:&quot;&quot;,&quot;CalculatedCoverages&quot;:[{&quot;ClientRoleCode&quot;:1,&quot;CoverageCode&quot;:4,&quot;CoverageDescription&quot;:&quot;Asistencia por fallecimiento de la mascota&quot;,&quot;IsRequired&quot;:true,&quot;IsSelectedByDefault&quot;:true,&quot;IsSelected&quot;:true,&quot;SumInsured&quot;:2000,&quot;Rate&quot;:0.16152,&quot;TypeOfCoefficient&quot;:&quot;Multiplier&quot;,&quot;AnnualPremium&quot;:323.04},{&quot;ClientRoleCode&quot;:1,&quot;CoverageCode&quot;:1,&quot;CoverageDescription&quot;:&quot;Robo de la mascota&quot;,&quot;IsRequired&quot;:false,&quot;IsSelectedByDefault&quot;:false,&quot;IsSelected&quot;:false,&quot;SumInsured&quot;:30000,&quot;Rate&quot;:0.16152,&quot;TypeOfCoefficient&quot;:&quot;Multiplier&quot;,&quot;AnnualPremium&quot;:4845.6,&quot;VariationIDSelected&quot;:0,&quot;ClientId&quot;:&quot;&quot;},{&quot;ClientRoleCode&quot;:1,&quot;CoverageCode&quot;:3,&quot;CoverageDescription&quot;:&quot;Gastos por Sacrificio&quot;,&quot;IsRequired&quot;:false,&quot;IsSelectedByDefault&quot;:false,&quot;IsSelected&quot;:false,&quot;SumInsured&quot;:2000,&quot;Rate&quot;:0.16152,&quot;TypeOfCoefficient&quot;:&quot;Multiplier&quot;,&quot;AnnualPremium&quot;:323.04,&quot;VariationIDSelected&quot;:0,&quot;ClientId&quot;:&quot;&quot;},{&quot;ClientRoleCode&quot;:1,&quot;CoverageCode&quot;:2,&quot;CoverageDescription&quot;:&quot;Gastos veterinarios&quot;,&quot;IsRequired&quot;:false,&quot;IsSelectedByDefault&quot;:false,&quot;IsSelected&quot;:false,&quot;SumInsured&quot;:30000,&quot;Rate&quot;:0.16152,&quot;TypeOfCoefficient&quot;:&quot;Multiplier&quot;,&quot;AnnualPremium&quot;:4845.6,&quot;VariationIDSelected&quot;:0,&quot;ClientId&quot;:&quot;&quot;},{&quot;ClientRoleCode&quot;:1,&quot;CoverageCode&quot;:5,&quot;CoverageDescription&quot;:&quot;Responsabilidad Civil Mascotas&quot;,&quot;IsRequired&quot;:false,&quot;IsSelectedByDefault&quot;:false,&quot;IsSelected&quot;:false,&quot;SumInsured&quot;:2000,&quot;Rate&quot;:42.8948,&quot;TypeOfCoefficient&quot;:&quot;Pormilage&quot;,&quot;AnnualPremium&quot;:85.7896,&quot;VariationIDSelected&quot;:0,&quot;ClientId&quot;:&quot;&quot;}],&quot;Roles&quot;:[{&quot;ClientRoleCode&quot;:1,&quot;BirthDate&quot;:&quot;2005-05-05T00:00:00.000Z&quot;,&quot;GenderCode&quot;:2,&quot;IsSmoker&quot;:false,&quot;ClientId&quot;:&quot;7109&quot;}],&quot;GrossPremiumByFrequencies&quot;:[{&quot;CalculationOption&quot;:&quot;AllCoverages&quot;,&quot;DataOption&quot;:&quot;Totals_BillingItems_Details&quot;,&quot;PaymentFrequencyCode&quot;:1,&quot;PaymentFrequencyDescription&quot;:&quot;Anual&quot;,&quot;BillEffectiveDate&quot;:&quot;2025-10-01T00:00:00.000Z&quot;,&quot;BillExpirationDate&quot;:&quot;2026-10-01T00:00:00.000Z&quot;,&quot;BasicAnnualPremium&quot;:323.04,&quot;BasicModalPremium&quot;:323.04,&quot;AnnualPremiumNetOfTaxes&quot;:323.04,&quot;GrossAnnualPremium&quot;:369.8808,&quot;ModalPremiumNetOfTaxes&quot;:323.04,&quot;GrossModalPremium&quot;:369.8808,&quot;GrossPremiumByBillItems&quot;:[{&quot;BillingItemCode&quot;:1,&quot;BillingItemDescription&quot;:&quot;Prima total&quot;,&quot;AnnualBillingAmount&quot;:323.04,&quot;ModalBillingAmount&quot;:323.04},{&quot;BillingItemCode&quot;:2,&quot;BillingItemDescription&quot;:&quot;Impuestos&quot;,&quot;AnnualBillingAmount&quot;:46.8408,&quot;ModalBillingAmount&quot;:46.8408}]},{&quot;CalculationOption&quot;:&quot;AllCoverages&quot;,&quot;DataOption&quot;:&quot;Totals_BillingItems_Details&quot;,&quot;PaymentFrequencyCode&quot;:2,&quot;PaymentFrequencyDescription&quot;:&quot;Semestral&quot;,&quot;BillEffectiveDate&quot;:&quot;2025-10-01T00:00:00.000Z&quot;,&quot;BillExpirationDate&quot;:&quot;2026-04-01T00:00:00.000Z&quot;,&quot;BasicAnnualPremium&quot;:323.04,&quot;BasicModalPremium&quot;:193.824,&quot;AnnualPremiumNetOfTaxes&quot;:323.04,&quot;GrossAnnualPremium&quot;:369.8808,&quot;ModalPremiumNetOfTaxes&quot;:193.824,&quot;GrossModalPremium&quot;:240.6648,&quot;GrossPremiumByBillItems&quot;:[{&quot;BillingItemCode&quot;:1,&quot;BillingItemDescription&quot;:&quot;Prima total&quot;,&quot;AnnualBillingAmount&quot;:323.04,&quot;ModalBillingAmount&quot;:193.824},{&quot;BillingItemCode&quot;:2,&quot;BillingItemDescription&quot;:&quot;Impuestos&quot;,&quot;AnnualBillingAmount&quot;:46.8408,&quot;ModalBillingAmount&quot;:46.8408}]},{&quot;CalculationOption&quot;:&quot;AllCoverages&quot;,&quot;DataOption&quot;:&quot;Totals_BillingItems_Details&quot;,&quot;PaymentFrequencyCode&quot;:3,&quot;PaymentFrequencyDescription&quot;:&quot;Trimestral&quot;,&quot;BillEffectiveDate&quot;:&quot;2025-10-01T00:00:00.000Z&quot;,&quot;BillExpirationDate&quot;:&quot;2026-01-01T00:00:00.000Z&quot;,&quot;BasicAnnualPremium&quot;:323.04,&quot;BasicModalPremium&quot;:113.064,&quot;AnnualPremiumNetOfTaxes&quot;:323.04,&quot;GrossAnnualPremium&quot;:369.8808,&quot;ModalPremiumNetOfTaxes&quot;:113.064,&quot;GrossModalPremium&quot;:159.9048,&quot;GrossPremiumByBillItems&quot;:[{&quot;BillingItemCode&quot;:1,&quot;BillingItemDescription&quot;:&quot;Prima total&quot;,&quot;AnnualBillingAmount&quot;:323.04,&quot;ModalBillingAmount&quot;:113.064},{&quot;BillingItemCode&quot;:2,&quot;BillingItemDescription&quot;:&quot;Impuestos&quot;,&quot;AnnualBillingAmount&quot;:46.8408,&quot;ModalBillingAmount&quot;:46.8408}]}],&quot;ExtrapremiumDiscountTaxRisks&quot;:[{&quot;ExtrapremiumDiscountTaxCode&quot;:1,&quot;ApplicationOrder&quot;:10,&quot;Description&quot;:&quot;Impuesto al valor agregado&quot;,&quot;IsRequired&quot;:true,&quot;IsSelectedByDefault&quot;:true,&quot;IsSelected&quot;:true}],&quot;ReturnValueOptionList&quot;:true}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Headers Rating Service" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Content-Type" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Basic ${__P(auth_basic_token,TXhBZG1pbjpBZG1pbl8xMjM=)}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - HTTP 200" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="49587">200</stringProp>
+              <stringProp name="49586">200</stringProp>
             </collectionProp>
             <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
             <intProp name="Assertion.test_type">8</intProp>
@@ -236,33 +258,83 @@
             <boolProp name="Assertion.assume_success">false</boolProp>
           </ResponseAssertion>
           <hashTree/>
-          <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="SLA - Max 2000ms" enabled="true">
-            <stringProp name="DurationAssertion.duration">2000</stringProp>
+          <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="SLA - Max Duracion Rating" enabled="true">
+            <stringProp name="DurationAssertion.duration">${__P(rating_max_duration,5000)}</stringProp>
           </DurationAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - Sin errores" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - Sin errores" enabled="false">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="-1323120774">(?i)(error|exception|stacktrace)</stringProp>
+              <stringProp name="-356988842">(?i)(stacktrace|NullPointerException|InternalServerError)</stringProp>
             </collectionProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-            <intProp name="Assertion.test_type">2</intProp>
+            <intProp name="Assertion.test_type">1</intProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <boolProp name="Assertion.not">true</boolProp>
-            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.custom_message">La respuesta contiene indicadores de error del servidor</stringProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - Contiene prima calculada" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - AnnualPremium calculado" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="1599474980">&quot;AnnualPremium&quot;</stringProp>
+              <stringProp name="-2080399026">&quot;AnnualPremium&quot;:</stringProp>
             </collectionProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-            <intProp name="Assertion.test_type">2</intProp>
+            <intProp name="Assertion.test_type">16</intProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
-            <stringProp name="Assertion.custom_message">La respuesta no contiene el campo AnnualPremium</stringProp>
+            <stringProp name="Assertion.custom_message">La respuesta no contiene AnnualPremium calculado</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - LineOfBusinessCode presente" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="621824402">&quot;LineOfBusinessCode&quot;:11</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <intProp name="Assertion.test_type">16</intProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <stringProp name="Assertion.custom_message">La respuesta no contiene LineOfBusinessCode correcto (esperado: 11)</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - CalculatedCoverages tiene coberturas" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-331078326">&quot;CoverageDescription&quot;:</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <intProp name="Assertion.test_type">16</intProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <stringProp name="Assertion.custom_message">La respuesta no contiene descripcion de coberturas calculadas</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - Cobertura principal seleccionada" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1125787725">&quot;IsSelected&quot;:true</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <intProp name="Assertion.test_type">16</intProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <stringProp name="Assertion.custom_message">La respuesta no tiene ninguna cobertura seleccionada</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - GrossPremiumByFrequencies presente" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1214413708">&quot;PaymentFrequencyCode&quot;:1</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <intProp name="Assertion.test_type">16</intProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <stringProp name="Assertion.custom_message">La respuesta no contiene frecuencia de pago anual (code 1)</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - InsuranceDurationUnit Years" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1957702074">&quot;InsuranceDurationUnit&quot;:&quot;Years&quot;</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <intProp name="Assertion.test_type">16</intProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <stringProp name="Assertion.custom_message">La respuesta no indica duracion anual del seguro</stringProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Quotation por cliente" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Quotation por cliente" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/quotation</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -275,6 +347,7 @@
                 <stringProp name="Argument.name">clientId</stringProp>
                 <stringProp name="Argument.value">CLI-001</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
             </collectionProp>
           </elementProp>
@@ -306,7 +379,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Cotizacion" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Cotizacion" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/quotation</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -349,7 +422,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BusinessRules Evaluate PolicyAdmin" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BusinessRules Evaluate PolicyAdmin" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/businessrules/v1/Evaluate</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -392,7 +465,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Rating GrossAllModalPremium" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Rating GrossAllModalPremium" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/ratingservice/v1/Risk/GrossAllModalPremiumForAllCoverages</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -435,7 +508,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Rating GrossModalPremiumSelected" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Rating GrossModalPremiumSelected" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/ratingservice/v1/Risk/GrossModalPremiumForSelectedCoverages</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -478,7 +551,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Rating RiskString" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Rating RiskString" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/ratingservice/v1/RiskString</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -523,7 +596,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT Actualizar Cotizacion" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT Actualizar Cotizacion" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/quotation</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">PUT</stringProp>
@@ -566,7 +639,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Cotizaciones Vida" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Cotizaciones Vida" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/quotationlife</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -611,7 +684,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Duracion Seguro" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Duracion Seguro" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/insuranceduration</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -654,7 +727,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Productos por Canal" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Productos por Canal" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/policyadminservice/v1/product</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -699,7 +772,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Requerimiento Underwriting" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Crear Requerimiento Underwriting" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/underwritingservice/v1/requirement</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -742,7 +815,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Requerimientos por Cliente" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Requerimientos por Cliente" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/underwritingservice/v1/requirement/getbyclient</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -787,7 +860,7 @@
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Casos Underwriting por Filtro" enabled="true">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Casos Underwriting por Filtro" enabled="false">
           <stringProp name="HTTPSampler.path">/rest/underwritingservice/v1/underwritingcase/getbyfilter</stringProp>
           <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -841,7 +914,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="02 - Claims (Siniestros)" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;02_Claims&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -1026,7 +1099,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="03 - Billing (Facturacion y Cobranza)" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;03_Billing&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -1275,7 +1348,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="04 - Sales" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;04_Sales&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -1755,7 +1828,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="05 - Distribution Management" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;05_Distribution&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -2534,7 +2607,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="06 - User Management" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;06_User_Management&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -2732,7 +2805,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="07 - Products" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;07_Products&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3059,7 +3132,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="08 - Reinsurance" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;08_Reinsurance&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3280,7 +3353,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="09 - Portal Reinsurance" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;09_Portal_Reinsurance&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3384,7 +3457,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="10 - Portal Self Service" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;10_Portal_Self_Service&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3488,7 +3561,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="11 - User Center" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;11_User_Center&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3555,7 +3628,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="12 - Field Service (SMC)" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;12_Field_Service&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3703,7 +3776,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="13 - Feedback" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;13_Feedback&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3770,7 +3843,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="14 - Settings" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;14_Settings&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,5)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -4038,6 +4111,43 @@
         </hashTree>
       </hashTree>
       <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="Ver Árbol de Resultados" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>

@@ -116,19 +116,32 @@ Para POST con JSON, usar:
 Ej: /GetByChannel/{id} -> /GetByChannel/1 o /GetByChannel/DC-001
 NO usar variables de path en el path string con {}, solo en query params.
 
-## Rating Service - Schema de respuesta real (OpenAPI verificado)
+## Rating Service - Schema de respuesta real (confirmado por screenshot)
 
 Endpoint: POST /rest/ratingservice/v1/Risk/BasicAnnualPremiumForAllCoverage
-Respuesta: siempre HTTP 200 (no 201), devuelve objeto Risk con campo raiz **AnnualPremium** (number).
-Array de coberturas calculadas: **CalculatedCoverages** (cada elemento tiene AnnualPremium propio).
-Assertion de negocio validada: ResponseAssertion CONTAINS `"AnnualPremium"` sobre response_data (test_type 2).
+Host especifico: policyadmin.testview.policysense.solutions (NO usa HTTPDefaults del TG - requiere override en el sampler)
+Respuesta: HTTP 200, formato **XML** (no JSON). Contiene tags como <AnnualPremium>, <GrossPremiumByFrequency>, <Hash>.
+Assertion de negocio validada: ResponseAssertion CONTAINS `<AnnualPremium>` (sin comillas) sobre response_data (test_type 2).
+IMPORTANTE: La assertion anterior usaba `"AnnualPremium"` con comillas JSON — incorrecto porque la respuesta es XML.
 
-## CSVDataSet - patron para Rating
+El sampler necesita un HeaderManager propio (hijo) con:
+- Content-Type: application/json (el REQUEST es JSON aunque la respuesta sea XML)
+- Authorization: Bearer ${access_token}
+
+Body real del OpenAPI (campos PascalCase, NO camelCase):
+- LineOfBusinessCode, ProductCode, CalculationDate, EffectiveDate, ExpirationDate
+- OriginalEffectiveDate, SumInsured, SumInsuredAccumulationOfRisk, SumInsuredTaxes
+- AnnualPremium (valor 0 en request), ParticularData (JSON serializado como string)
+- InsuranceDuration, InsuranceDurationUnit, Roles (array con RoleCode, BirthDate, GenderCode, IsSmoker)
+
+ParticularData es un campo de dominio mascotas con: Specie, Sex, DateOfBirth, Size, HasPedigree, Neutering, Dangerousness, PetValue, PureBreed
+
+## CSVDataSet - columnas correctas para Rating (dominio mascotas)
 
 ```xml
 <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Rating Data" enabled="true">
   <stringProp name="filename">data/rating_data.csv</stringProp>
-  <stringProp name="variableNames">productCode,lob,insuredAge,coverageAmount,effectiveDate</stringProp>
+  <stringProp name="variableNames">lob_code,product_code,sum_insured,specie,sex,birth_date,size,has_pedigree,dangerousness,pet_value</stringProp>
   <boolProp name="ignoreFirstLine">true</boolProp>
   <stringProp name="delimiter">,</stringProp>
   <boolProp name="recycle">true</boolProp>
@@ -139,5 +152,5 @@ Assertion de negocio validada: ResponseAssertion CONTAINS `"AnnualPremium"` sobr
 ```
 
 El CSVDataSet debe colocarse ANTES del HTTPSamplerProxy (hermano, no hijo).
-Body con variables: {"productCode":"${productCode}","lob":"${lob}","effectiveDate":"${effectiveDate}","insuredAge":${insuredAge},"coverageAmount":${coverageAmount}}
-Nota: insuredAge y coverageAmount son numericos (sin comillas).
+Variables numericas sin comillas en el body: ${lob_code}, ${product_code}, ${sum_insured}, ${has_pedigree}, ${pet_value}.
+Variables string con comillas en el body: "${specie}", "${sex}", "${birth_date}", "${size}", "${dangerousness}".
