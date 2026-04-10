@@ -46,6 +46,24 @@ stages:
       inputs:
         jmeterVersion: '5.6.3'
     - task: PowerShell@2
+      displayName: 'Verificar conectividad OAuth'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "=== Test conectividad OAuth ==="
+          try {
+            $r = Invoke-WebRequest -Uri 'https://sales.v1130.policysense.solutions/oauth/v2/token' `
+              -Method POST `
+              -Body 'grant_type=password&username=MxAdmin&password=Admin_123&client_id=policysense' `
+              -ContentType 'application/x-www-form-urlencoded' `
+              -UseBasicParsing -TimeoutSec 15 -ErrorAction Stop
+            Write-Host "HTTP $($r.StatusCode) - OAuth OK"
+            Write-Host $r.Content.Substring(0, [Math]::Min(200, $r.Content.Length))
+          } catch {
+            Write-Host "##vso[task.logissue type=warning]OAuth fallo: $($_.Exception.Message)"
+            Write-Host "Posible causa: el agente no tiene acceso a la red QA de Policysense"
+          }
+    - task: PowerShell@2
       displayName: 'Ejecutar JMeter'
       env:
         JMETER_LOG_HTTP: False
