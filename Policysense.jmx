@@ -82,7 +82,7 @@
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
-      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="00 - SetUp OAuth Login" enabled="true">
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="00 - SetUp OAuth Login">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -181,7 +181,7 @@
       </HeaderManager>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="01 - Policy Admin">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;01_Policy_Admin&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;01_Policy_Admin&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,1)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -914,7 +914,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="02 - Claims (Siniestros)" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;02_Claims&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;02_Claims&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -1099,7 +1099,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="03 - Billing (Facturacion y Cobranza)" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;03_Billing&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;03_Billing&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -1348,7 +1348,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="04 - Sales" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;04_Sales&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;04_Sales&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -1828,7 +1828,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="05 - Distribution Management" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;05_Distribution&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;05_Distribution&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -2607,7 +2607,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="06 - User Management" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;06_User_Management&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;06_User_Management&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -2805,7 +2805,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="07 - Products" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;07_Products&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;07_Products&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3132,7 +3132,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="08 - Reinsurance" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;08_Reinsurance&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;08_Reinsurance&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3353,7 +3353,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="09 - Portal Reinsurance" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;09_Portal_Reinsurance&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;09_Portal_Reinsurance&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3457,7 +3457,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="10 - Portal Self Service" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;10_Portal_Self_Service&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;10_Portal_Self_Service&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3561,7 +3561,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="11 - User Center" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;11_User_Center&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;11_User_Center&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3628,7 +3628,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="12 - Field Service (SMC)" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;12_Field_Service&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;12_Field_Service&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3776,7 +3776,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="13 - Feedback" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;13_Feedback&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;13_Feedback&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -3843,7 +3843,7 @@
         </hashTree>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="14 - Settings" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;,&quot;ALL&quot;);(g==&quot;ALL&quot;||g==&quot;14_Settings&quot;)?props.get(&quot;users&quot;,&quot;5&quot;).toInteger():0,)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__groovy(def g=props.get(&quot;groupToRun&quot;)?:&quot;ALL&quot;;def u=(props.get(&quot;users&quot;)?:&quot;5&quot;).toInteger();(g==&quot;ALL&quot;||g==&quot;14_Settings&quot;)?u:0,)}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${__P(rampUp,10)}</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -4110,7 +4110,7 @@
           <hashTree/>
         </hashTree>
       </hashTree>
-      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
@@ -4184,7 +4184,7 @@
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report">
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
