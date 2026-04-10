@@ -1,0 +1,67 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-files.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-no-production.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/validate-jmx.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'CONTEXTO POLICYSENSE: Suite de seguros con modulos: Distribution Management (canales, jerarquias, comisiones multinivel, acuerdos economicos), Facturacion/Cobranza (recibos, primas, conciliacion), Policy Admin (polizas, cotizaciones, endosos, vision 360), Reaseguro (cesiones, contratos, bordereaux), Siniestros (FNOL, reservas, ajuste, liquidacion), Admin Usuarios. Manuales en docs/. Pipeline Azure DevOps en azure-pipelines.yml. NUNCA ejecutar contra produccion. Skills en .claude/skills/.'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "agent",
+            "prompt": "Verifica que los cambios realizados en archivos .jmx sean XML valido y que cada ThreadGroup tenga al menos un ResponseAssertion y un DurationAssertion. Si falta alguno, responde con {\"ok\": false, \"reason\": \"descripcion de lo que falta\"}. Si todo esta bien, responde con {\"ok\": true}. $ARGUMENTS"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -Command \"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code necesita tu atencion', 'Policysense - JMeter')\""
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+- [Skill de dominio asegurador](reference_skill_dominio.md) — Referencia al skill dominio-seguros-policysense.md con info de los 6 manuales .docx
