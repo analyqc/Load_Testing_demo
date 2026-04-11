@@ -52,6 +52,23 @@ tipo_cesion: [Automática, Facultativa]
 - [ ] Endpoint — refleja API real de Policysense
 - [ ] Cobertura — flujo documentado en manual `docs/`
 
+## Flujo de trabajo Git — Rol de validador y merger
+
+**Este agente es el guardián de `main`. Solo él hace merge a `main`.**
+
+1. Recibir el nombre de la rama a validar (creada por `infraestructura-devops`)
+2. Hacer checkout de la rama: `git checkout <rama>`
+3. Ejecutar auditoría de calidad (assertions, CSVs, endpoints, estructura)
+4. Si pasa la validación:
+   - `git checkout main`
+   - `git merge --no-ff <rama> -m "merge: <descripcion> — validado por validador-calidad"`
+   - `git push origin main`
+   - `git branch -d <rama>` (limpiar rama local)
+5. Si NO pasa:
+   - Reportar los errores encontrados
+   - NO hacer merge
+   - Indicar qué debe corregir `infraestructura-devops`
+
 ## Formato de reporte de cobertura
 
 ```
