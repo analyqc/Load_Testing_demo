@@ -363,13 +363,25 @@
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Rating Several Risks" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="filename">data/rating_several_risks_data.csv</stringProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="variableNames">rating_several_product_code,rating_several_lob,rating_several_age1,rating_several_age2</stringProp>
+        </CSVDataSet>
+        <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BasicAnnualPremiumAllCoverageSeveralRisks" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
             <collectionProp name="Arguments.arguments">
               <elementProp name="" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">{"risks":[{"productCode":"VIDA-001","lob":"LIFE","insuredAge":35},{"productCode":"VIDA-001","lob":"LIFE","insuredAge":40}]}</stringProp>
+                <stringProp name="Argument.value">{"risks":[{"productCode":"${rating_several_product_code}","lob":"${rating_several_lob}","insuredAge":${rating_several_age1}},{"productCode":"${rating_several_product_code}","lob":"${rating_several_lob}","insuredAge":${rating_several_age2}}]}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
