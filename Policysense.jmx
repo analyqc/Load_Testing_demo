@@ -357,6 +357,88 @@
           <hashTree/>
         </hashTree>
         </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST BasicAnnualPremiumAllCoverageSeveralRisks" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;;&quot;).collect{it.trim()}.contains(&quot;POST BasicAnnualPremiumAllCoverageSeveralRisks&quot;))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BasicAnnualPremiumAllCoverageSeveralRisks" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{"risks":[{"productCode":"VIDA-001","lob":"LIFE","insuredAge":35},{"productCode":"VIDA-001","lob":"LIFE","insuredAge":40}]}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">policyadmin.testview.policysense.solutions</stringProp>
+          <stringProp name="HTTPSampler.port">443</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/rest/ratingservice/v1/Risk/BasicAnnualPremiumAllCoverageSeveralRisks</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Headers Rating Service" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Basic ${__P(auth_basic_token,TXhBZG1pbjpBZG1pbl8xMjM=)}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - HTTP 200" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">8</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="SLA - Max Duracion Rating" enabled="true">
+            <stringProp name="DurationAssertion.duration">${__P(sla_rating_several,3000)}</stringProp>
+          </DurationAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - Sin errores" enabled="false">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1665220170">(?i)(stacktrace|NullPointerException|InternalServerError)</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message">La respuesta contiene indicadores de error del servidor</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">1</intProp>
+            <boolProp name="Assertion.not">true</boolProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - AnnualPremium calculado" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1256252800">&quot;AnnualPremium&quot;:</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message">La respuesta no contiene AnnualPremium calculado para los riesgos</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">16</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="GET Quotation por cliente" enabled="true">
           <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;;&quot;).collect{it.trim()}.contains(&quot;GET Quotation por cliente&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
