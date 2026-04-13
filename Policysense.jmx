@@ -96,8 +96,6 @@
           </elementProp>
         </collectionProp>
       </elementProp>
-      <boolProp name="TestPlan.functional_mode">false</boolProp>
-      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
     </TestPlan>
     <hashTree>
       <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="00 - SetUp OAuth Login">
@@ -181,7 +179,7 @@
           <hashTree/>
         </hashTree>
       </hashTree>
-      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Headers Globales" enabled="true">
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Headers Globales">
         <collectionProp name="HeaderManager.headers">
           <elementProp name="Authorization" elementType="Header">
             <stringProp name="Header.name">Authorization</stringProp>
@@ -209,7 +207,7 @@
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="Defaults PolicyAdmin" enabled="true">
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="Defaults PolicyAdmin">
           <intProp name="HTTPSampler.connect_timeout">5000</intProp>
           <intProp name="HTTPSampler.response_timeout">10000</intProp>
           <stringProp name="HTTPSampler.domain">${policyadmin_host}</stringProp>
@@ -233,7 +231,7 @@
           <boolProp name="quotedData">false</boolProp>
         </CSVDataSet>
         <hashTree/>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Rating BasicAnnualPremiumForAllCoverage" enabled="true">
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="POST Rating BasicAnnualPremiumForAllCoverage">
           <stringProp name="IfController.condition">${__groovy(def r=props.get(&quot;requestToRun&quot;)?:&quot;ALL&quot;;r.equals(&quot;ALL&quot;)||r.split(&quot;;&quot;).collect{it.trim()}.contains(&quot;POST Rating BasicAnnualPremiumForAllCoverage&quot;))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
@@ -282,7 +280,7 @@
               <boolProp name="Assertion.assume_success">false</boolProp>
             </ResponseAssertion>
             <hashTree/>
-            <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="SLA - Max Duracion Rating" enabled="true">
+            <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="SLA - Max Duracion Rating">
               <stringProp name="DurationAssertion.duration">${__P(rating_max_duration,5000)}</stringProp>
             </DurationAssertion>
             <hashTree/>
@@ -365,7 +363,7 @@
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Rating Several Risks" enabled="true">
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV - Rating Several Risks">
             <stringProp name="delimiter">,</stringProp>
             <stringProp name="fileEncoding">UTF-8</stringProp>
             <stringProp name="filename">data/rating_several_risks_data.csv</stringProp>
@@ -377,7 +375,7 @@
             <stringProp name="variableNames">rating_several_product_code,rating_several_lob,rating_several_age1,rating_several_age2</stringProp>
           </CSVDataSet>
           <hashTree/>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BasicAnnualPremiumAllCoverageSeveralRisks" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST BasicAnnualPremiumAllCoverageSeveralRisks">
             <stringProp name="HTTPSampler.domain">policyadmin.testview.policysense.solutions</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.protocol">https</stringProp>
@@ -410,7 +408,7 @@
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - HTTP 200" enabled="true">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert - HTTP 200">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="49586">200</stringProp>
               </collectionProp>
@@ -420,7 +418,7 @@
               <intProp name="Assertion.test_type">8</intProp>
             </ResponseAssertion>
             <hashTree/>
-            <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="SLA - Max Duracion Rating" enabled="true">
+            <DurationAssertion guiclass="DurationAssertionGui" testclass="DurationAssertion" testname="SLA - Max Duracion Rating">
               <stringProp name="DurationAssertion.duration">${__P(sla_rating_several,3000)}</stringProp>
             </DurationAssertion>
             <hashTree/>
