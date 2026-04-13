@@ -8,7 +8,7 @@ Fecha: 2026-04-09 | Version: v1130 / testview | Total endpoints: 251 | Fuente: O
 
 | Modulo | Host | Servicios | Total Endpoints | Alta Prio | Automatizados JMX | Sin automatizar |
 |--------|------|-----------|----------------|-----------|-------------------|----------------|
-| Policy Admin | policyadmin.testview | 11 | 61 | 38 | 3 | 58 |
+| Policy Admin | policyadmin.testview | 11 | 61 | 38 | 5 | 56 |
 | Facturacion y Cobranza | billing.v1130 | 2 | 6 | 4 | 2 | 4 |
 | Siniestros | claims.v1130 | 2 | 4 | 2 | 3 | 1 |
 | Distribution Management | distributionchannels.v1130 | 4 | 100 | 45 | 3 | 97 |
@@ -19,9 +19,9 @@ Fecha: 2026-04-09 | Version: v1130 / testview | Total endpoints: 251 | Fuente: O
 | Servicio de Campo (SMC) | smc.v1130 | 2 | 3 | 2 | 2 | 1 |
 | Portal Autoservicio | portal.v1130 | 1 | 2 | 1 | 2 | 0 |
 | Configuracion | settings.v1130 | 5 | 11 | 2 | 2 | 9 |
-| **Totales** | **11 hosts** | **40** | **251** | **126** | **31** | **220** |
+| **Totales** | **11 hosts** | **40** | **251** | **126** | **33** | **218** |
 
-> **Cobertura actual**: 31 samplers JMX de 251 endpoints reales = **12.4%**. Oportunidad de automatizar 220 endpoints adicionales.
+> **Cobertura actual**: 33 samplers JMX de 251 endpoints reales = **13.1%**. Oportunidad de automatizar 218 endpoints adicionales.
 
 ---
 
@@ -34,10 +34,10 @@ Descripcion: Calculo de capitales y primas de coberturas de un riesgo
 
 | # | Metodo | Endpoint | Descripcion | Prioridad | Automatizado | ThreadGroup JMX | SLA (ms) |
 |---|--------|---------|-------------|-----------|------------|----------------|---------|
-| 1 | POST | /Risk/BasicAnnualPremiumForAllCoverage | Calculo de primas anuales por cobertura | ALTA | No | -- | 2000 |
+| 1 | POST | /Risk/BasicAnnualPremiumForAllCoverage | Calculo de primas anuales por cobertura | ALTA | Si | 01 - Policy Admin | 2000 |
 | 2 | POST | /Risk/GrossAllModalPremiumForAllCoverages | Calculo importes a facturar por frecuencia | ALTA | No | -- | 2000 |
 | 3 | POST | /Risk/GrossModalPremiumForSelectedCoverages | Importes a facturar coberturas seleccionadas | ALTA | No | -- | 2000 |
-| 4 | POST | /Risk/BasicAnnualPremiumAllCoverageSeveralRisks | Primas anuales para multiples riesgos | ALTA | En revision | 01 - Policy Admin | 2000 |
+| 4 | POST | /Risk/BasicAnnualPremiumAllCoverageSeveralRisks | Primas anuales para multiples riesgos | ALTA | Si | 01 - Policy Admin | 2000 |
 | 5 | GET | /Risk/PolicyInformation | Info de poliza (OfficialPolicyNumber, EffectiveDate) | MEDIA | No | -- | 2000 |
 | 6 | GET | /RiskString | Procesar cadena de riesgo | BAJA | No | -- | 2000 |
 
@@ -591,4 +591,5 @@ Credenciales QA: `username=MxAdmin, password=Admin_123, client_id=policysense`
 
 | Fecha | Endpoint | Estado | Rama | Commits | Auditoria |
 |-------|----------|--------|------|---------|-----------|
-| 2026-04-13 | POST /Risk/BasicAnnualPremiumAllCoverageSeveralRisks | En revision | feat/rating-several-risks | 01e82ef, 714f4b5 | APROBADO por validador-calidad (pendiente merge a main) |
+| 2026-04-13 | POST /Risk/BasicAnnualPremiumForAllCoverage | Automatizada | main | preexistente | Registrado en inventario |
+| 2026-04-13 | POST /Risk/BasicAnnualPremiumAllCoverageSeveralRisks | Automatizada | main | 3c6c82b | APROBADO por validador-calidad — mergeado a main |

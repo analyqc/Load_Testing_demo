@@ -48,6 +48,12 @@ Usar este workflow cada vez que llegue un requerimiento nuevo o de modificación
   - Assertions necesarias (HTTP code, SLA, campos de negocio)
   - Variables JMeter a usar o crear
   - Dependencias de otros samplers (ej: debe correr después de POST Crear Cotizacion)
+- **Guardar documentación del endpoint** en `docs/apis/<Modulo>/<NombreEndpoint>.md`:
+  - Descripción de negocio, método, URL completa, autenticación
+  - Parámetros / body con tipos y ejemplos
+  - Respuesta esperada con campos clave
+  - Prerrequisitos y postcondiciones
+  - Notas JMeter: property SLA, CSV usado, nombre del IfController
 
 ---
 
