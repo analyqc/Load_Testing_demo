@@ -57,15 +57,27 @@ Usar este workflow cada vez que llegue un requerimiento nuevo o de modificación
 **Consulta permanente:** `seguro-especialista`
 
 - Recibir el brief del `analizador-requerimientos-api`
+- **Crear datos de prueba CSV** en `data/<nombre-endpoint>.csv`:
+  - Identificar qué parámetros del endpoint son parametrizables (body fields, query params, path vars)
+  - Generar mínimo 5 filas con combinaciones representativas de valores del dominio asegurador
+  - Nombrar columnas con prefijo descriptivo para evitar colisiones entre CSVs (ej: `rating_several_product_code`)
+  - Verificar contra el `validador-calidad` que los valores son válidos según la lógica de negocio
+- **Configurar `CSVDataSet`** en el sampler:
+  - Agregar `CSVDataSet` como hijo del `IfController` (antes del `HTTPSamplerProxy`)
+  - Configurar `filename` relativo: `data/<nombre-endpoint>.csv`
+  - `ignoreFirstLine: true`, `recycle: true`, `stopThread: false`
+  - `shareMode: shareMode.all`
+  - Listar las variables exactas del CSV en `variableNames`
+- **Actualizar el body/params** del `HTTPSamplerProxy` para usar las variables `${variable_csv}`
 - En `Policysense.jmx`:
   - Agregar o modificar el `HTTPSamplerProxy` en el ThreadGroup correcto
   - Configurar prerrequisitos: samplers previos, variables extraídas (RegexExtractor / JSR223)
   - Configurar postcondiciones: variables que otros samplers necesitarán después
   - Agregar assertions:
-    - `ResponseAssertion` — código HTTP esperado (ej: `2\d\d`)
-    - `DurationAssertion` — SLA del módulo (ms)
-    - `ResponseAssertion` negativa — sin `error|exception|stacktrace`
-    - Assertions de negocio específicas del endpoint
+    - `ResponseAssertion` HTTP 200 — **siempre, por defecto**
+    - `DurationAssertion` — **siempre**, con valor configurable por property JMeter: `${__P(sla_<nombre_sampler_snake>,3000)}` (default 3000 ms). El nombre de la property debe derivarse del nombre del sampler en snake_case (ej: `sla_basic_annual_premium_several_risks`). Esto permite sobreescribir el SLA por API desde el pipeline con `-Jsla_<nombre>=NNNN`
+    - `ResponseAssertion` negativa (sin errores) — solo si se solicita explícitamente
+    - Assertions de negocio (campos del response) — solo si se solicita explícitamente
   - Envolver el sampler en su `IfController` con la condición `requestToRun`
 - Indicar a `infraestructura-devops` si necesita rama nueva o no
 
@@ -93,12 +105,15 @@ Usar este workflow cada vez que llegue un requerimiento nuevo o de modificación
 
 - Hacer checkout de la rama entregada por `infraestructura-devops`
 - Ejecutar checklist de auditoría:
-  - [ ] ResponseAssertion presente y correcta
-  - [ ] DurationAssertion con SLA del módulo
-  - [ ] Assertions de negocio específicas del endpoint
+  - [ ] `ResponseAssertion` HTTP 200 presente — **obligatorio siempre**
+  - [ ] `DurationAssertion` presente con `${__P(sla_<nombre>,...)}` — **obligatorio siempre**, valor configurable por property
+  - [ ] Assertions de negocio — solo si fueron solicitadas en el requerimiento
   - [ ] IfController con condición `requestToRun` correcta
   - [ ] Prerrequisitos y postcondiciones configurados
   - [ ] No rompe ningún ThreadGroup existente
+  - [ ] CSV existe en `data/` con mínimo 5 filas de datos válidos
+  - [ ] `CSVDataSet` configurado correctamente (filename, variableNames, recycle, shareMode)
+  - [ ] Body/params del sampler usan variables `${...}` del CSV
 - Ejecutar el test localmente o vía pipeline apuntando a la rama
 - **Si la ejecución es exitosa:**
   - **Opción A (se solicitó merge):** `git checkout main` → `git merge --no-ff <rama>` → `git push origin main` → eliminar rama

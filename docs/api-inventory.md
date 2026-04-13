@@ -37,7 +37,7 @@ Descripcion: Calculo de capitales y primas de coberturas de un riesgo
 | 1 | POST | /Risk/BasicAnnualPremiumForAllCoverage | Calculo de primas anuales por cobertura | ALTA | No | -- | 2000 |
 | 2 | POST | /Risk/GrossAllModalPremiumForAllCoverages | Calculo importes a facturar por frecuencia | ALTA | No | -- | 2000 |
 | 3 | POST | /Risk/GrossModalPremiumForSelectedCoverages | Importes a facturar coberturas seleccionadas | ALTA | No | -- | 2000 |
-| 4 | POST | /Risk/BasicAnnualPremiumAllCoverageSeveralRisks | Primas anuales para multiples riesgos | ALTA | No | -- | 2000 |
+| 4 | POST | /Risk/BasicAnnualPremiumAllCoverageSeveralRisks | Primas anuales para multiples riesgos | ALTA | En revision | 01 - Policy Admin | 2000 |
 | 5 | GET | /Risk/PolicyInformation | Info de poliza (OfficialPolicyNumber, EffectiveDate) | MEDIA | No | -- | 2000 |
 | 6 | GET | /RiskString | Procesar cadena de riesgo | BAJA | No | -- | 2000 |
 
@@ -584,3 +584,11 @@ Credenciales QA: `username=MxAdmin, password=Admin_123, client_id=policysense`
 2. **Mapear gateway**: Los paths del JMX (`/api/v1/...`) no coinciden con los REST reales (`/rest/{service}/v1/...`). Verificar si existe API Gateway que transforma rutas.
 
 3. **FNOL limitado**: El OpenAPI de claims solo expone 1 GET. Investigar si hay endpoints adicionales protegidos o si el JMX usa paths via gateway.
+
+---
+
+## Changelog de automatizacion
+
+| Fecha | Endpoint | Estado | Rama | Commits | Auditoria |
+|-------|----------|--------|------|---------|-----------|
+| 2026-04-13 | POST /Risk/BasicAnnualPremiumAllCoverageSeveralRisks | En revision | feat/rating-several-risks | 01e82ef, 714f4b5 | APROBADO por validador-calidad (pendiente merge a main) |
